@@ -1,0 +1,28 @@
+{
+    "Home": {
+        "slider1a": "Eu quero!",
+        "slider1b": "<img src='./images/products.gif' class='crop'>",
+        "slider1c": "Uma maneira de você dizer o que deseja e receber centenas de ofertas.",
+        "slider1d": "Exitem vários sites de venda, mas somente um onde você diz o que quer, W1Buy.",
+        "slider2a": "Eu tenho!",
+        "slider2b": "<img src='./images/products.gif' class='crop'>",
+        "slider2c": "A maneira mais fácil de encontrar quem deseja algo.",
+        "slider2d": "Faça parte de uma rede de fornecedores de confiança, venha para W1Buy.",
+        "slider3a": "<img src='./images/bigger_logo.png'>",
+        "slider3b": "<img src='./images/products.gif' class='crop'>",
+        "slider3c": "",
+        "slider3d": "Ligando diariamente milhares de pessoas e empresas com o objetivo ajudar a QUEM PROCURA e QUEM TEM.",
+        "slider4a": "<img src='./images/bigger_logo.png' class='logo'>",
+        "slider4b": "Tudo e todos no mesmo lugar",
+        "slider4c": "",
+        "slider4d": "Grátis, Completo, Único, Eficiente, Garantido, Surpreendente.",
+        "slider5a": "Eu quero",
+        "slider5b": "",
+        "slider5c": "Quero dizer a todos o que desejo,<br />e receber centenas de ofertas.",
+        "slider5d": "Prosseguir",
+        "slider5e": "Eu tenho",
+        "slider5f": "",
+        "slider5g": "Quero encontrar quem deseja o que<br />tenho e fazer uma oferta.",
+        "slider5h": "Prosseguir"
+    }
+}

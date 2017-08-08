@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h1 class="panel-title pull-left" style="font-size:30px;">
+            {{user.DisplayName}} (ID: {{user.UserID}})<br />
+            <small>{{user.Email}}</small>
+        </h1>
+        <div class="pull-right"> Perfil Progresso
+            <div class="progress">
+                <div id="profile-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="{{data.Progress}}" aria-valuemin="0"
+                    aria-valuemax="100" style="width: {{user.Progress}}%;">
+                    <span>{{user.Progress}}% Completo</span>
+                </div>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <hr>
+        <div class="accountBtn pull-left text-center">
+            <a href="/contas/cadastro" class="btn btn-default margin-bottom10-xs">
+                Meu Cadastro 
+            </a>
+            <a href="/anuncios/novo" class="btn btn-default margin-bottom10-xs hidden">
+                Anunciar o que desejo
+            </a>
+            <a href="/anuncios" class="btn btn-default margin-bottom10-xs hidden">
+                Encontrar quem deseja
+            </a>
+            <a href="/contas/meusanuncios" class="btn btn-default margin-bottom10-xs">
+                Meus Anúncios
+            </a>
+            <a href="/contas/mensagens" class="btn btn-default margin-bottom10-xs">
+                Mensagens
+            </a>
+        </div>
+        <div id="users">
+        </div>
+    </div>
+</div>
+
+<script>
+    let userInfo = "{{json user}}".replace(/&quot;/g, '"');
+
+</script>

@@ -1,0 +1,132 @@
+<div class="container container-fluid">
+    <div class="row">
+        <div style="padding-top: 15px;"></div>
+        <div class="hidden-xs">
+            {{>account}}
+        </div>
+        <hr>
+        <!-- Simple post content example. -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2>Cadastro <small class="pull-right"><span class="required">*</span> Campos mandatórios</small></h2>
+
+                <div class="row">
+                    <form class="form-horizontal" data-toggle="validator" id="profileForm" name="profileForm" role="form">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="txtFirstName">Nome: </label>
+
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="txtFirstName" name="first_name" placeholder="Nome" required title="Nome é obrigatório" type="text"
+                                        tabindex="1" value="{{user.FirstName}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="txtLastName">Sobrenome: </label>
+
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="txtLastName" name="last_name" placeholder="Sobrenome" required type="text" tabindex="2" value="{{user.LastName}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="txtDisplayName">Nome no Site: </label>
+
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="txtDisplayName" placeholder="Nome no Site" required title="Nome no site é obrigatório" type="text"
+                                        tabindex="3" value="{{user.DisplayName}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group hidden">
+                                <label class="col-sm-2 control-label" for="select2Countries">País: <span class="required">*</span></label>
+
+                                <div class="col-sm-10">
+                                    <select data-placeholder="Escolha o País" id="select2Countries" required style="width: 100%;" title="País">
+                                        <option></option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="txtSSN">CPF: </label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" id="txtSSN" placeholder="CPF" required title="CPF no site é obrigatório" type="text" tabindex="4"
+                                        value="{{user.DocId}}" onchange="validateCpf(this)">
+                                </div>
+
+                                <label class="col-sm-2 control-label" for="txtBoxPostalCode">CEP: </label>
+                                <div class="col-sm-5">
+                                    <div class="input-group">
+                                        <input id="txtBoxPostalCode" type="text" class="form-control" title="CEP" placeholder="CEP" required value="{{user.PostalCode}}"
+                                            tabindex="5">
+                                        <span class="input-group-btn">
+                                            <button id="btnPostalCode" class="btn btn-default" type="button"><i class="glyphicon glyphicon-globe"></i></button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="select2Regions">Estado: <span class="required">*</span></label>
+                                <div class="col-sm-3">
+                                    <select data-placeholder="Escolha o Estado" id="select2Regions" style="width: 100%;" required title="Estado" tabindex="6">
+                                        <option></option>
+                                    </select>
+                                </div>
+
+                                <label class="col-sm-2 control-label" for="select2Cities">Cidade: <span class="required">*</span></label>
+                                <div class="col-sm-5">
+                                    <select data-placeholder="Escolha a Cidade" id="select2Cities" style="width: 100%;" required title="Cidade" tabindex="7">
+                                        <option></option>
+                                    </select>
+                                    <input class="form-control hidden" id="txtCity" name="city" placeholder="Cidade" required type="text" value="{{user.City}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="txtBoxStreet">Endereço: </label>
+                                <div class="col-sm-6">
+                                    <input id="txtBoxStreet" type="text" class="form-control" placeholder="Ex.: Rua João Pedro" title="Endereço" required value="{{user.Street}}"
+                                        tabindex="8">
+                                </div>
+
+                                <label class="col-sm-2 control-label" for="txtAddressNumber">Número: </label>
+                                <div class="col-sm-2">
+                                    <input id="txtAddressNumber" type="text" class="form-control" title="Número" required value="{{user.StreetNumber}}" tabindex="9">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="txtBoxDistrict">Bairro: </label>
+
+                                <div class="col-sm-10">
+                                    <input class="form-control" id="txtBoxDistrict" name="district" placeholder="Bairro" required type="text" value="{{user.District}}"
+                                        tabindex="10">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" for="txtTelephone">Telefone: </label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" id="txtTelephone" name="telefone" placeholder="Telefone" type="text" value="{{user.Telephone}}"
+                                        tabindex="11">
+                                </div>
+
+                                <label class="col-sm-2 control-label" for="txtCell">Celular: </label>
+                                <div class="col-sm-4">
+                                    <input class="form-control" id="txtCell" name="cell" placeholder="Celular" type="text" value="{{user.Cell}}" tabindex="12">
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12">
+                                <button class="btn btn-primary pull-right" id="btnUpdateUser" tabindex="12">Atualizar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

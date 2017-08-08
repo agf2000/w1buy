@@ -1,0 +1,112 @@
+<div id="div-forms">
+
+    {{#if error}}
+    <div class="alert alert-danger">{{error}}</div>
+    {{/if}}
+
+    {{#if info}}
+    <div class="alert alert-info">{{info}}</div>
+    {{/if}}
+
+    {{#if success}}
+    <div class="alert alert-success">{{success}}</div>
+    {{/if}}
+
+    <!-- Begin # Login Form -->
+    <form id="login-form" action="/users/login" method="POST">
+        <div class="modal-body">
+            <div id="div-login-msg">
+                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                <span id="text-login-msg">Insira email e senha</span>
+            </div>
+            <input id="login_username" name="username" class="form-control" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                placeholder="Endereço de E-Mail" required autocomplete="off">
+            <input id="login_password" name="password" class="form-control" type="password" placeholder="Senha" required autocomplete="off">
+            <div class="checkbox">
+                <label>
+                    <input id="remember_me" type="checkbox"> Permanecer conectado
+                </label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div>
+                <button id="login_btn" type="submit" class="btn btn-primary btn-lg btn-block">Login</button>
+            </div>
+            <div>
+                <button id="login_lost_btn" type="button" class="btn btn-link">Esqueceu sua senha?</button>
+                <button id="login_register_btn" type="button" class="btn btn-link">Cadastre-se »</button>
+            </div>
+        </div>
+    </form>
+    <!-- End # Login Form -->
+
+    <!-- Begin | Lost Password Form -->
+    <form id="lost-form" style="display:none;">
+        <div class="modal-body">
+            <div id="div-lost-msg">
+                <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
+                <span id="text-lost-msg">Digite seu e-mail abaixo.</span>
+            </div>
+            <input id="lost_email" class="form-control" type="email" placeholder="E-Mail" requiredmessage="Insira o email cadastrado."
+                required autocomplete="off" />
+            <span class="small">*Recebará um email um link para criação de uma nova senha.</span>
+        </div>
+        <div class="modal-footer">
+            <div>
+                <button id="lost_btn" type="submit" class="btn btn-primary btn-lg btn-block">Enviar</button>
+            </div>
+            <div>
+                <button id="lost_login_btn" type="button" class="btn btn-link">« Login</button>
+                <button id="lost_register_btn" type="button" class="btn btn-link">Cadastre-se</button>
+            </div>
+        </div>
+    </form>
+    <!-- End | Lost Password Form -->
+
+    <!-- Begin | Register Form -->
+    <form id="register-form" style="display:none;">
+        <div class="modal-body">
+            <div id="div-register-msg">
+                <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
+                <span id="text-register-msg">Cadastre uma nova conta.</span>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <input id="register_email" name="email" class="form-control" type="email" placeholder="E-Mail" title="Preenchimento obrigatório"
+                        requiredmessage="Insira um e-mail válido." pattern="^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9]+$" required
+                        autocomplete="off">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-5">
+                    <input id="register_firstname" name="firstName" class="form-control" type="text" placeholder="Nome" title="Preenchimento obrigatório"
+                        requiredmessage="Insira seu nome" required autocomplete="off">
+                    <input id="register_lastname" name="lastName" class="form-control" type="text" placeholder="Sobrenome" title="Preenchimento obrigatório"
+                        requiredmessage="Insira seu sobrenome" required autocomplete="off">
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-7">
+                    <input id="register_password" name="password" class="form-control" type="password" placeholder="Senha Secreta" title="Preenchimento obrigatório"
+                        requiredmessage="Insira sua senha." required>
+                    <input id="register_password2" name="password2" class="form-control" type="password" placeholder="Confirmmar Senha" title="Preenchimento obrigatório"
+                        requiredmessage="Redigite senha inserida." required>
+                    <span id="confirmMessage" class="confirmMessage"></span>
+                </div>
+                <div class="col-xs-12">
+                    <span class="small">Ao cadastrar-me, declaro que sou maior de idade e aceito as <a href="/privacidade" target="_blank">Políticas de Privacidade</a> e os <a href="/termos" target="_blank">Termos de Uso</a> do W1Buy Soluções em compras.</span>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div>
+                <button id="register_btn" type="submit" class="btn btn-primary btn-lg btn-block">Cadastrar</button>
+            </div>
+            <div>
+                <button id="register_login_btn" type="button" class="btn btn-link">« LogiIn</button>
+                <button id="register_lost_btn" type="button" class="btn btn-link hidden">Esqueceu sua senha?</button>
+            </div>
+        </div>
+    </form>
+    <!-- End | Register Form -->
+
+    <!-- Hidden input for firstChoice -->
+    <input type="hidden" name="firstChoice">
+</div>
+<!-- End # DIV Form -->

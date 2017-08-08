@@ -1,0 +1,244 @@
+<div class="container">
+    <div style="padding-top: 15px;">
+    </div>
+    <div class="row panel">
+        <div class="col-xs-12">
+            {{#if data.MsgWaiting}}
+            <div id="divMsgResponded" class="alert alert-warning" role="alert" style="margin-top: 0px;">
+                Sua última mensagem sobre este anúncio ainda não foi respondida pelo comprador. Por favor aguarde a resposta. Assim que o
+                comprador ver sua mensagem e responde-la, poderá enviar mais mensagens a este comprador. Caso não receba
+                uma resposta do comprador em até 48 horas, terá a oportunidade de refazer sua pergunta.
+            </div>
+            {{/if}}
+
+            <div id="divMsgLimited" class="alert alert-warning hidden" role="alert">
+                No presente momento, o número limite de mensagens para este anúncio foi atingido.
+            </div>
+
+            <div id="divMsgBlocked" class="alert alert-danger hidden" role="alert">
+                Sua última mensagem sobre este anúncio foi bloqueada pelo comprador. Infelizmente, não poderá enviar mais mensagens a este
+                comprador sobre este anúncio. Em caso de dúvidas, pode entrar em contato <a href="/contato">conosco</a>                para exclarecimentos.
+            </div>
+
+            <div class="item-container">
+                {{#if data.Files}}
+                <div class="col-sm-3 col-md-offset-1">
+                    <div class="images-container">
+                        <div class="row carousel-row">
+                            <div class="slide-row">
+                                <div class="carousel slide slide-carousel" data-ride="carousel">
+                                    <!-- Indicators -->
+                                    <ol class="carousel-indicators">
+                                        {{#each data.Files}}
+                                        <li data-target="#carousel-{{@root.data.PostingId}}" data-slide-to="{{@index}}"></li>
+                                        {{/each}}
+                                    </ol>
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+                                        {{#each data.Files}}
+                                        <div class="item {{#unless @index}}active{{/unless}}">
+                                            <a href="/uploads/{{@root.data.UserId}}/posts/{{@root.data.PostingId}}/large/{{filename}}" target="_blank">
+                                                <img src="/uploads/{{@root.data.UserId}}/posts/{{@root.data.PostingId}}/thumbnail/{{stringFilename filename}}" src="" alt="Imagem" />
+                                            </a>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/if}}
+                <div class="{{#if data.Files}}col-sm-12 col-md-7{{else}}col-md-10 col-md-offset-1{{/if}}">
+                    <div class="details-container">
+                        <h2>{{formatPostTitle data.Title}}</h2>
+                        <p>{{data.PostingDescription}}</p>
+                        <hr />
+                        <div class="user-info">
+                            {{data.PosterDisplayName}} -
+                            <div id="rateYoContainer" data-rateyo-rating="{{data.Rating}}" title="{{formatRating data.Rating}}" onclick="javascript: startRating(this)">
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="condition">
+                            <strong>Condição:</strong> <span>{{data.PostingCondition}}</span>
+                        </div>
+                        <div class="locations">
+                            <strong>Localidades:</strong>
+                            <dl>
+                                {{#each data.Locales}}
+                                <dt>{{City}} ({{Region}}) Qde: {{Quantity}}; &nbsp;</dt>
+                                {{/each}}
+                            </dl>
+                            <div class="row clearfix">&nbsp;</div>
+                        </div>
+                    </div>
+                    <br />
+                    <a href="#" class="btn btn-default pull-left" onclick="window.location.href = '/contas/minhaconta'; return false;"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp; Fechar</a>
+
+                    <!-- The user may send any message if there are no waiting answers -->
+                    {{#unless data.MsgWaiting}}
+                    <a id="lnkMakeOffer" href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#msgFormModal">
+                        <i class="fa fa-thumbs-o-up"></i>&nbsp; Faça sua Oferta
+                    </a> {{/unless}}
+
+                    <!-- Post owner -->
+                    {{#if data.Owner}}
+                    <a id="lnkEditPost" href="/anuncios/editar/{{data.PostingId}}/{{data.UserId}}" class="btn btn-primary pull-right">
+                        <i class="fa fa-edit"></i>&nbsp; Editar Anúncio
+                    </a> {{/if}}
+                </div>
+
+                <div class="clearfix"></div>
+                <br /><br />
+                <h3>Perguntas & Respostas</h3>
+                <div id="postMsgsContainer" class="messages col-xs-12">
+                </div>
+                <div class="clearfix"></div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let postingMsgs = "{{json data.PostingMsgs}}".replace(/&quot;/g, '"');
+
+</script>
+
+<!-- Post msg form panel -->
+<div id="msgFormModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-header-primary">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Faça sua oferta</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Caro(a) {{user.DisplayName}}, faça agora sua oferta e venda rápido seu produto. O comprador está aguardando.
+                </p>
+
+                <form id="msgForm" class="form-horizontal">
+                    <div class="row">
+
+                        <!-- Priority Value -->
+                        {{#if data.PriorityValue}}
+                        <input id="priorityValueAmount" type="hidden" value="{{data.PriorityValueAmount}}" />
+                        <div class="form-group">
+                            <div class="col-md-10 col-xs-offset-1">
+                                <label for="txtPriorityValue" class="control-label">Oferte seu valor:</label>
+                            </div>
+                            <div class="col-md-5 col-xs-offset-1">
+                                <div class="input-group">
+                                    <div class="input-group-addon">R$</div>
+                                    <input id="txtPriorityValue" type="number" class="form-control" title="Seu Preço" value="0" autocomplete="off" />
+                                    <div class="input-group-addon">.00</div>
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-xs-offset-1">
+                                <h4 id="divLessValue"></h4>
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        <!-- Priority Delivery -->
+                        {{#if data.PriorityDelivery}}
+                        <input id="priorityDeliveryAmount" type="hidden" value="{{data.PriorityDeliveryAmount}}" />
+                        <div class="form-group">
+                            <div class="col-md-10 col-xs-offset-1">
+                                <label for="txtPriorityDelivery" class="control-label">Prazo de Entrega:</label>
+                            </div>
+                            <div class="col-md-5 col-xs-offset-1">
+                                <div class="input-group">
+                                    <input id="txtPriorityDelivery" type="number" class="form-control" title="Prazo de Entrega" value="0" autocomplete="off"
+                                    />
+                                    <div class="input-group-addon">Dias</div>
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-xs-offset-1">
+                                <div id="divLessDelivery"></div>
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        <!-- Message -->
+                        <div class="form-group">
+                            <div class="col-md-2 col-xs-10 col-xs-offset-1">
+                                <label for="msgTextarea" class="control-label">
+                                    Mensagem:
+                                </label>
+                            </div>
+                            <div class="col-md-10 col-xs-10 col-xs-offset-1">
+                                <textarea class="form-control" id="msgTextarea" placeholder="Mande uma mensagem agora para o comprador..." rows="3" title="Campo obrigatório"
+                                    oninvalid="this.setCustomValidity('Digite sua mensagem')" oninput="setCustomValidity('')"
+                                    required></textarea> Limite de
+                                <span id="word_left">30</span> palavras. Palavras digitadas: <span id="display_count">0</span>.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-10 col-xs-offset-1">
+                                <button id="btnAddMsg" type="submit" class="btn btn-primary pull-right"><i class="fa fa-send"></i>&nbsp; Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Post msg form panel close -->
+
+<!-- Rating Form Panel -->
+<div aria-hidden="true" aria-labelledby="ratingFormLabel" role="dialog" tabindex="-1" id="ratingFormModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-info">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Avalie o usuário</h4>
+            </div>
+            <div class="modal-body">
+                <form id="ratingForm" role="form" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-xs-10 col-md-offset-1">
+                            <div class="form-group">
+                                <div id="ratingContainer">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea class="form-control" id="ratingComments" placeholder="(Opcional) Digite seus comentários aqui..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="text-right">
+                                    <button id="btnSaveRating" class="btn btn-primary"><i class="fa fa-check"></i>&nbsp; Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div id="replies">
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Rating form panel close -->
+
+<input id="postingId" type="hidden" value="{{data.PostingId}}" />
+<input id="ownerId" type="hidden" value="{{data.UserId}}" />
+<input id="subject" type="hidden" value="{{data.Title}}" />
+<input id="displayName" type="hidden" value="{{data.PosterDisplayName}}" />
+
+<script>
+    let userInfo = "{{json user}}".replace(/&quot;/g, '"');
+
+</script>

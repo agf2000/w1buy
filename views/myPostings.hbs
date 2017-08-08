@@ -1,0 +1,152 @@
+<div class="container">
+    <div style="padding-top: 15px;">
+    </div>
+    <div class="hidden-xs">
+        {{>account}}
+    </div>
+    <div id="myPostings" class="panel panel-default">
+        <div class="panel-body">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#activePostings" aria-controls="activePostings" role="tab" data-toggle="tab">Anúncios Ativos</a></li>
+                <li role="presentation"><a href="#soldPostings" aria-controls="soldPostings" role="tab" data-toggle="tab">Anúncios Concluídos</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="activePostings">
+                    <h3 data-bind="html: activePostings().length ? '' : 'Você não tem anúncios ativos'"></h3>
+                    <ul data-bind="foreach: activePostings">
+                        <li>
+                            <div class="row carousel-row">
+                                <div class="slide-row">
+                                    <div data-bind="attr: { id: 'carousel-' + postingId }" class="carousel slide slide-carousel" data-ride="carousel" data-interval="2000">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            <!-- ko foreach: files -->
+                                            <li data-bind="css: ($index() === 0 ? 'active' : ''), attr: { 'data-target': '#carousel-' + $parent.postingId, 'data-slide-to': $index }"></li>
+                                            <!-- /ko -->
+                                        </ol>
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner">
+                                            <!-- ko foreach: files -->
+                                            <div data-bind="css: ($index() === 0 ? 'item active frame' : 'item frame')">
+                                                <img data-bind="click: $parent.openImages.bind($data), attr: { src: '../uploads/' + $parent.ownerId + '/posts/' + $parent.postingId + '/thumbnail/' + FileName }"
+                                                    src="" alt="Imagem" height="120" />
+                                            </div>
+                                            <!-- /ko -->
+                                            <!-- ko ifnot: files -->
+                                            <div class="item active frame">
+                                                <img src="/images/no-image.jpg" alt="Image">
+                                            </div>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    <div class="slide-content">
+                                        <a href="#" data-bind="attr: { href: '/anuncios/' + postingId + '/' + my.userInfo.UserID }">
+                                            <h4 data-bind="html: title + ' (ID: ' + postingId + ')'">
+                                            </h4>
+                                        </a>
+                                        <p data-bind="html: description">
+                                        </p>
+                                        <strong>Prioridade(s): </strong>
+                                        <!-- ko if: priorityValue -->
+                                        Menor Valor
+                                        <!-- /ko -->
+                                        <!-- ko if: priorityDelivery -->
+                                        , Prazo de Entrega
+                                        <!-- /ko -->
+                                        <dl data-bind="foreach: locales">
+                                            <dt data-bind="text: City + ' Qde: ' + Math.max(0, Quantity) + '; &nbsp;'"></dt>
+                                        </dl>
+                                    </div>
+                                    <div class="slide-footer pull-right">
+                                        <div class="buttons">
+                                            <button data-bind="click: deletePost.bind($data, $index());" class="btn btn-sm btn-danger">
+                                                <i class="glyphicon glyphicon glyphicon-remove"></i>&nbsp; Excluir
+                                            </button>
+                                            <a href="#" data-bind="attr: { href: '/anuncios/editar/' + postingId + '/' + my.userInfo.UserID }" class="btn btn-sm btn-primary">
+                                                <i class="glyphicon glyphicon glyphicon-pencil"></i>&nbsp; Editar
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="soldPostings">
+                    <h3 data-bind="text: soldPostings().length ? '' : 'Você não tem anúncios concluídos'"></h3>
+                    <ul data-bind="foreach: soldPostings">
+                        <li>
+                            <div class="row carousel-row">
+                                <div class="slide-row">
+                                    <div data-bind="attr: { id: 'carousel-' + postingId }" class="carousel slide slide-carousel" data-ride="carousel">
+                                        <!-- Indicators -->
+                                        <ol class="carousel-indicators">
+                                            <!-- ko foreach: files -->
+                                            <li data-bind="css: ($index() === 0 ? 'active' : ''), attr: { 'data-target': '#carousel-' + $parent.postingId, 'data-slide-to': $index }"></li>
+                                            <!-- /ko -->
+                                        </ol>
+
+                                        <!-- Wrapper for slides -->
+                                        <div class="carousel-inner">
+                                            <!-- ko foreach: files -->
+                                            <div data-bind="css: ($index() === 0 ? 'item active frame' : 'item frame')">
+                                                <img data-bind="click: $parent.openImages.bind($data), attr: { src: '../uploads/' + $parent.ownerId + '/posts/' + $parent.postingId + '/thumbnail/' + FileName }"
+                                                    src="" alt="Imagem" height="120" />
+                                            </div>
+                                            <!-- /ko -->
+                                            <!-- ko ifnot: files -->
+                                            <div class="item active frame">
+                                                <img src="/images/no-image.jpg" alt="Image">
+                                            </div>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    <div class="slide-content">
+                                        <h4 data-bind="attr: { href: '/busca?id=' + postingId }, html: title">
+                                        </h4>
+                                        <p data-bind="html: description">
+                                        </p>
+                                        <dl data-bind="foreach: locales">
+                                            <dt data-bind="text: City + ' Qde: ' + Math.max(0, Quantity) + '; &nbsp;'"></dt>
+                                        </dl>
+                                    </div>
+                                    <div class="slide-footer pull-right">
+                                        <div class="buttons">
+                                            <button data-bind="click: deletePost.bind($data, $index());" class="btn btn-sm btn-danger">
+                                                <i class="glyphicon glyphicon glyphicon-remove"></i>&nbsp; Excluir
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gallery panel -->
+<div id="galleryModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <!-- handlebars partials gallery -->
+                {{>gallery}}
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Gallery panel close -->

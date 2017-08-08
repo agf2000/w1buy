@@ -1,0 +1,41 @@
+/* Flip around the padding for proper display in narrow viewports */
+
+.accountBtn .btn {
+    margin: 5px 5px 5px 0;
+}
+
+@media only screen and (min-width: 320px) {
+    .accountBtn.btn {
+        margin-right: 0;
+    }
+    .accountBtn.btn:last-child {
+        margin-bottom: 0;
+    }
+    .accountBtn .btn:first-child {
+        margin-top: 5px;
+    }
+}
+
+@media only screen and (min-width: 360px) {
+    .accountBtn.btn {
+        margin: 0px 5px 5px 0 !important;
+    }
+}
+
+@media only screen and (min-width: 1020px) {
+    .accountBtn.btn {
+        margin: 5px 5px 5px 0 !important;
+    }
+}
+
+@media only screen and (min-width: 1400px) {
+    .accountBtn.btn {
+        margin: 5px 5px 5px 0 !important;
+    }
+}
+
+@media only screen and (min-width: 1900px) {
+    .accountBtn.btn {
+        margin: 5px 5px 5px 0 !important;
+    }
+}

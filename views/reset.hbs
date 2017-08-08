@@ -1,0 +1,35 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row" style="margin: 5px 0 15px 0;">
+
+            {{#if error}}
+            <div class="alert alert-danger">{{error}}</div>
+            {{/if}}
+
+            {{#if info}}
+            <div class="alert alert-info">{{info}}</div>
+            {{/if}}
+
+            {{#if success}}
+            <div class="alert alert-success">{{success}}</div>
+            {{/if}}
+
+            <form method="POST">
+                <legend>Recriar Senha</legend>
+                <div class="form-group">
+                    <label for="password">Nova Senha</label>
+                    <input type="password" name="password" value="" placeholder="Nova Senha" autofocus="autofocus" class="form-control" autocomplete="off"
+                        required oninvalid="this.setCustomValidity('Insira sua nova senha.')" oninput="setCustomValidity('')" />
+                </div>
+                <div class="form-group">
+                    <label for="confirm">Confirmar Senha</label>
+                    <input type="password" name="confirm" value="" placeholder="Confirmar senha" class="form-control" autocomplete="off" oninvalid="this.setCustomValidity('Confirme sua nova senha.')" oninput="setCustomValidity('')" required
+                    />
+                </div>
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary">Atualizar Senha</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="en"><![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+
+	<!-- Your Basic Site Informations -->
+	<title>{{title}}</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="W1Buy." />
+	<meta name="keywords" content="W1Buy" />
+	<meta name="author" content="AGF" />
+
+	<!-- Mobile Specific Meta -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+	<!-- Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:400,300,600,700" rel="stylesheet" type="text/css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+	<!-- Stylesheets -->
+	<link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/lib/pace-js/themes/pace-theme-flash.css" />
+	<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css"> {{!--
+	<link rel="stylesheet" href="/lib/slick-carousel/slick/css/slick.css">
+	<link rel="stylesheet" href="/lib/slick-carousel/slick/css/slick-theme.css"> --}}
+	<link rel="stylesheet" href="/lib/slider-pro/css/slider-pro.min.css">
+	<link rel="stylesheet" href="/lib/fancybox/css/jquery.fancybox.css">
+	<link rel="stylesheet" href="/lib/sweetalert2/css/sweetalert2.min.css" />
+	<link rel="stylesheet" href="/stylesheets/style.css">
+
+	<!-- Custom Colors -->
+	<!--<link rel="stylesheet" href="css/colors/blue/color.css">-->
+	<!--<link rel="stylesheet" href="css/colors/green/color.css">-->
+	<!--<link rel="stylesheet" href="css/colors/pink/color.css">-->
+	<!--<link rel="stylesheet" href="css/colors/purple/color.css">-->
+	<!--<link rel="stylesheet" href="css/colors/yellow/color.css">-->
+
+	<!--[if lt IE 9]>
+    	<script src="js/html5.js"></script>
+        <script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	<!--[if lt IE 8]>
+    	<link rel="stylesheet" href="css/ie-older.css">
+    <![endif]-->
+
+	{{#each css}}
+	<!-- dynamic css -->
+	<link href="{{this}}" rel="stylesheet">
+	<!-- /dynamic css -->
+	{{/each}}
+
+	<noscript>
+		<link rel="stylesheet" href="/stylesheets/no-js.css">
+	</noscript>
+
+	<!-- Favicons -->
+	<link rel="shortcut icon" href="/images/favicon.ico">
+	<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
+
+</head>
+
+<body>
+
+	<!-- #header -->
+	<header id="header" class="page-header" style="background: url('/images/content/bg/1-cut.jpg');">
+
+		<!-- #navigation -->
+		<nav id="navigation" class="navbar">
+
+			<!-- .container -->
+			<div class="container">
+
+				<div class="navbar-brand">
+					{{#if user.UserID}}
+					<a href="/contas/minhaconta">
+                    {{else}}
+                    <a href="#" onclick="slideAction('gotoSlide'); return false;">
+                    {{/if}}
+                        <img src="/images/logo.png" alt="Logo" />
+                    </a>
+				</div>
+
+				<ul class="nav navbar-nav">
+					<li class="active hidden-xs" style="font-size: 16px; font-style: italic;"><a name="slogan">Conectando Pessoas e Negocios!!</a></li>
+					{{#if user}}
+					<li>
+						<span class="badge badge-important newMsgCount">{{user.NewMessages}}</span>
+						<a href="/contas/mensagens"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></a>
+					</li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							{{user.DisplayName}}
+							<b class="caret"></b>
+						</a>
+						<span id="iStars">
+							<i data-toggle="tooltip" data-placement="bottom"><img src="/images/spacer.gif" /></i>
+							<i data-toggle="tooltip" data-placement="bottom"><img src="/images/spacer.gif" /></i>
+						</span>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li>
+								<div class="navbar-content">
+									<div class="row">
+										<div class="col-md-12">
+											<h4 style="color: #000 !important;">{{user.FirstName}} {{user.LastName}}</h4>
+											<p class="text-muted small">
+												{{user.Email}}</p>
+											<div class="divider">
+											</div>
+											<a href="/contas/cadastro" class="btn btn-default">Meu Cadastro</a>
+											<a href="/anuncios/novo" class="btn btn-default hidden">Anunciar o que desejo</a>
+											<a href="/anuncios" class="btn btn-default hidden">Encontar quem deseja</a>
+											<a href="/contas/meusanuncios" class="btn btn-default">Meus Anúncios</a>
+											<a href="/contas/mensagens" class="btn btn-default margin-bottom10-xs">Mensagens</a>
+										</div>
+									</div>
+								</div>
+								<div class="navbar-footer">
+									<div class="navbar-footer-content">
+										<div class="row">
+											<div class="col-xs-6">
+												<a class="btn btn-default btn-sm" data-toggle="modal" data-target="#passwordChangeModal">
+                                                    <i class="fa fa-unlock-alt" aria-hidden="true"></i> Alterar Senha
+                                                </a>
+											</div>
+											<div class="col-xs-6">
+												<a href="/contas/logout" class="btn btn-default btn-sm pull-right"><i class="fa fa-power-off" aria-hidden="true"></i> Sair</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</li>
+					{{/if}}
+				</ul>
+
+			</div>
+			<!-- .container end -->
+
+		</nav>
+		<!-- #navigation end -->
+
+		<div class="page-header-overlay">
+		</div>
+
+	</header>
+	<!-- #header end -->
+
+	<!-- .wrap-container -->
+	<div class="wrap-container20 bg-grayesh">
+
+		<!-- .container -->
+		<div class="container">
+
+			{{{body}}}
+
+		</div>
+		<!-- .container end -->
+
+	</div>
+	<!-- .padding-bottom end -->
+
+	<!-- #footer -->
+	<footer id="footer">
+
+		{{>footer}}
+
+	</footer>
+	<!-- #footer end -->
+
+	{{>passwordChange}}
+
+	<a href="#" class="scrollup" title="Back to Top!">Scroll</a>
+	<!-- Back to Top -->
+
+	<!--[if lt IE 8]>
+    	<div class="browser-notice">
+            <div class="container">
+            	<div class="text">
+                    <h1>Internet Explorer Out To Date</h1>
+                    <p>Please update your Internet Explorer browser with a newer version (Internet Explorer 8 above) now!</p>
+                    <span>You can download it <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="blank">here....</a></span>
+                </div>
+            </div>
+        </div>
+	<![endif]-->
+
+	<!-- JavaScripts -->
+	<script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+	{{!--
+	<script type="text/javascript" src="/lib/jquery/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="/lib/jquery/jquery-migrate-1.2.1.min.js"></script> --}}
+	<script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="/lib/pace-js/js/pace.min.js"></script>
+	<script type="text/javascript" src="/lib/jquery.easing/js/jquery.easing.min.js"></script>
+	<script type="text/javascript" src="/lib/smoothscroll/js/smoothscroll.min.js"></script>
+	<script type="text/javascript" src="/lib/response.js/js/response.min.js"></script>
+	<script type="text/javascript" src="/lib/jquery-placeholder/js/jquery.placeholder.js"></script>
+	<script type="text/javascript" src="/lib/fitvids/js/fitvids.min.js"></script>
+	<script type="text/javascript" src="/javascripts/jquery.imgpreload.min.js"></script>
+	<script type="text/javascript" src="/lib/jquery-waypoints/js/waypoints.min.js"></script>
+	<!--moment -->
+	<script type="text/javascript" src="/lib/moment/moment.min.js"></script>
+	<script type="text/javascript" src="/lib/moment/locale/pt-br.js"></script>
+	{{!-- <script src="/lib/moment/timezone/moment-timezone.min.js"></script>
+	<script src="/lib/moment/timezone/moment-timezone-with-data.min.js"></script>
+	<script src="/lib/moment/timezone/moment-timezone-with-data-2012-2022.min.js"></script> --}}
+	{{!--
+	<script type="text/javascript" src="/lib/slick-carousel/slick/js/slick.min.js"></script> --}}
+	<script type="text/javascript" src="/lib/slider-pro/js/jquery.sliderPro.min.js"></script>
+	{{!--
+	<script type="text/javascript" src="js/jquery.mousewheel-3.0.6.pack.js"></script> --}}
+	<script type="text/javascript" src="/lib/fancybox/js/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="/lib/fancybox/helpers/js/jquery.fancybox-media.js"></script>
+	<script type="text/javascript" src="/javascripts/parallax.min.js"></script>
+	{{!--
+	<script type="text/javascript" src="/lib/jquery.counterup/js/jquery.counterup.min.js"></script> --}}
+	<script type="text/javascript" src="/lib/isotope-layout/js/isotope.pkgd.min.js"></script>
+	<script type="text/javascript" src="/javascripts/script.js"></script>
+	<script type="text/javascript" src="/lib/sweetalert2/js/sweetalert2.min.js"></script>
+	<!-- Socket.IO -->
+	<script src="/socket.io/socket.io.js"></script>
+
+	<script type="text/javascript">
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-74617611-1', 'auto');
+        ga('send', 'pageview');
+	</script>
+
+	{{#each script}}
+	<!-- dynamic scripts -->
+	<script src="{{this}}"></script>
+	<!-- /dynamic scripts -->
+	{{/each}}
+
+</body>
+
+</html>

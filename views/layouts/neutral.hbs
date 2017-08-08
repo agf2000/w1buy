@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="ie ie6" lang="pt-BR"><![endif]-->
+<!--[if IE 7]><html class="ie ie7" lang="pt-BR"><![endif]-->
+<!--[if IE 8]><html class="ie ie8" lang="pt-BR"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="pt-BR"><![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!-->
+<html lang="pt-BR">
+<!--<![endif]-->
+
+<head>
+
+    <!-- Your Basic Site Informations -->
+    <title>{{title}}</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="W1Buy." />
+    <meta name="keywords" content="W1Buy" />
+    <meta name="author" content="AGF" />
+
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,300,600,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/pace-js/themes/pace-theme-flash.css" />
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+
+    <!-- Custom Colors -->
+    <!--<link rel="stylesheet" href="css/colors/blue/color.css">-->
+    <!--<link rel="stylesheet" href="css/colors/green/color.css">-->
+    <!--<link rel="stylesheet" href="css/colors/pink/color.css">-->
+    <!--<link rel="stylesheet" href="css/colors/purple/color.css">-->
+    <!--<link rel="stylesheet" href="css/colors/yellow/color.css">-->
+
+    <!--[if lt IE 9]>
+    	<script src="js/html5.js"></script>
+        <script src="js/respond.min.js"></script>
+	<![endif]-->
+
+    <!--[if lt IE 8]>
+    	<link rel="stylesheet" href="css/ie-older.css">
+    <![endif]-->
+
+    {{#each css}}
+    <!-- dynamic css -->
+    <link href="{{this}}" rel="stylesheet" />
+    <!-- /dynamic css -->
+    {{/each}}
+
+    <noscript>
+        <link rel="stylesheet" href="/stylesheets/no-js.css" />
+    </noscript>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+
+</head>
+
+<body>
+
+    <!-- #header -->
+    <header id="header" class="page-header" style="background: url('/images/content/bg/1-cut.jpg');">
+
+        <!-- #navigation -->
+        <nav id="navigation" class="navbar">
+
+            <!-- .container -->
+            <div class="container">
+
+                <div class="navbar-brand">
+                    {{#if user.UserID}}
+                    <a href="/contas/minhaconta">
+                    {{else}}
+                    <a href="/">
+                    {{/if}}
+                        <img src="/images/logo.png" alt="Logo" />
+                    </a>
+                </div>
+
+                <ul class="nav navbar-nav">
+                    <li class="active hidden-xs" style="font-size: 16px; font-style: italic;">
+                        <a name="slogan">Conectando Pessoas e Negocios!!</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- .container end -->
+
+        </nav>
+        <!-- #navigation end -->
+
+        <div class="page-header-overlay">
+        </div>
+
+    </header>
+    <!-- #header end -->
+
+    <!-- .wrap-container -->
+    <div class="wrap-container20 bg-grayesh">
+
+        <!-- .container -->
+        <div class="container">
+
+            {{{body}}}
+
+        </div>
+        <!-- .container end -->
+
+    </div>
+    <!-- .padding-bottom end -->
+
+    <!-- #footer -->
+    <footer id="footer">
+
+        <!-- .container -->
+        <div class="container padding-bottom20">
+
+            <!-- .row -->
+            <div class="row">
+
+                <div class="col-sx-12 col-sm-4 widget text-center">
+                    <!-- 1 -->
+                    <img src="/images/logo.png" alt="Logo" class="footer-logo" />
+                    <div class="footer-socials">
+                        <a href="https://www.facebook.com/www.w1buy.com.br" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="https://plus.google.com/110289445330350054280" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a>
+                        <a href="https://youtu.be/GF9B4zTbWfY" title="you tube" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-sx-12 col-sm-4 widget text-center">
+                    <!-- 2 -->
+                    <div class="row">
+                        <ul>
+                            <li><a href="/privacidade" target="_blank">Politica de Privacidade</a></li>
+                            <li><a href="/termos" target="_blank">Termos de Uso</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-sx-12 col-sm-4 widget text-center">
+                    <!-- 3 -->
+                    <a href="#">www.w1buy.com.br</a><br /><a href="#">w1buy@w1buy.com.br</a>
+                </div>
+
+            </div>
+            <!-- .row end -->
+
+        </div>
+        <!-- .container end -->
+
+        <div class="footer-copyright">
+            <div class="container">
+                <p>&copy; 2016-2017 por <a href="http://w1buy.com.br.com" target="_blank">W1Buy</a> - Todos direitos reservados.
+                </p>
+            </div>
+        </div>
+
+    </footer>
+    <!-- #footer end -->
+
+    <a href="#" class="scrollup" title="Back to Top!">Scroll</a>
+    <!-- Back to Top -->
+
+    <!--[if lt IE 8]>
+    	<div class="browser-notice">
+            <div class="container">
+            	<div class="text">
+                    <h1>Internet Explorer Out To Date</h1>
+                    <p>Please update your Internet Explorer browser with a newer version (Internet Explorer 8 above) now!</p>
+                    <span>You can download it <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="blank">here....</a></span>
+                </div>
+            </div>
+        </div>
+	<![endif]-->
+
+    <!-- JavaScripts -->
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/lib/pace-js/js/pace.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery.easing/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="/lib/smoothscroll/js/smoothscroll.min.js"></script>
+    <script type="text/javascript" src="/lib/response.js/js/response.min.js"></script>
+
+    {{#each script}}
+    <!-- dynamic scripts -->
+    <script src="{{this}}"></script>
+    <!-- /dynamic scripts -->
+    {{/each}}
+
+</body>
+
+</html>

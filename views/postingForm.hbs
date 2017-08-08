@@ -1,0 +1,327 @@
+<div class="container container-fluid">
+    <div class="row">
+        <div style="padding-top: 15px;"></div>
+        <div class="hidden-xs">
+            {{>account}}
+        </div>
+        <hr>
+        <!-- Post content form. -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form id="postingForm" name="postingForm" class="form-horizontal">
+                    <fieldset>
+
+                        <div class="form-group">
+                            <input type="hidden" value="{{data.PostingId}}" name="folderId" />
+                            <input type="hidden" value="{{user.UserID}}" name="userId" />
+                            <input type="hidden" value="{{user.UserID}}" name="ownerId" />
+                            <input type="hidden" value="posts" name="folder" />
+                        </div>
+
+                        <!-- Form Name -->
+                        <legend>
+                            {{#if data.PostingId}}Editando: Anúncio ({{data.PostingId}}){{else}}Insira aqui o que deseja{{/if}}
+                            <small class="pull-right">* Campos Obrigatórios</small>
+                        </legend>
+
+                        <div id="alertNoCity" class="alert alert-warning hidden">
+                            <strong>Atenção! </strong>
+                            <span>Favor preencher seu <a href="/contas/cadastro" style="background: none; color: #000 !important;"><u>cadastro</u></a> com pelo menos cidade e estado antes de inserir anúncios.</span>
+                        </div>
+
+                        <div class="alert alert-danger required alert-dismissable hidden">
+                            <button class="close" data-dismiss="alert">x</button>
+                            <strong>Atenção! </strong> Foi deixado de preenchar um ou mais campo obrigatorio.
+                        </div>
+
+                        <!-- Post Type -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="radios">Tipo de Anúncio: *</label>
+                            <div class="col-md-8 text-justify">
+                                <label class="radio-inline" for="prodServ-1">
+                                    <input type="radio" name="prodServ" id="prodServ-1" value="1" checked />
+                                    Produto
+                                </label>
+                                <label class="radio-inline" for="prodServ-2">
+                                    <input type="radio" name="prodServ" id="prodServ-2" value="2" />
+                                    Serviço
+                                </label>
+                                <label class="radio-inline" for="prodServ-3">
+                                    <input type="radio" name="prodServ" id="prodServ-3" value="3" />
+                                    Vestuário
+                                </label>
+                                <label class="radio-inline" for="prodServ-4">
+                                    <input type="radio" name="prodServ" id="prodServ-4" value="4" />
+                                    Veículo
+                                </label>
+                                <label class="radio-inline" for="prodServ-5">
+                                    <input type="radio" name="prodServ" id="prodServ-5" value="5" />
+                                    Imóvel
+                                </label>
+                                <label class="radio-inline" for="prodServ-6">
+                                    <input type="radio" name="prodServ" id="prodServ-6" value="6" />
+                                    Educação
+                                </label>
+                                <label class="radio-inline" for="prodServ-7">
+                                    <input type="radio" name="prodServ" id="prodServ-7" value="7" />
+                                    Lazer
+                                </label>
+                                <label class="radio-inline" for="prodServ-8">
+                                    <input type="radio" name="prodServ" id="prodServ-8" value="8" />
+                                    Turismo
+                                </label>
+                                <label class="radio-inline" for="prodServ-9">
+                                    <input type="radio" name="prodServ" id="prodServ-9" value="9" />
+                                    Celular
+                                </label>
+                                <label class="radio-inline" for="prodServ-10">
+                                    <input type="radio" name="prodServ" id="prodServ-10" value="10" />
+                                    Saúde e Beleza
+                                </label>
+                                <label class="radio-inline" for="prodServ-11">
+                                    <input type="radio" name="prodServ" id="prodServ-11" value="11" />
+                                    Compartilhar
+                                </label>
+                                <label class="radio-inline" for="prodServ-12">
+                                    <input type="radio" name="prodServ" id="prodServ-12" value="12" />
+                                    Outros
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Post Title -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="txtBoxTitle">Título: *</label>
+                            <div class="col-md-8">
+                                <input id="txtBoxTitle" name="title" type="text" placeholder="Ex: passagem aérea, Fiat Palio, Roupas masculina, Pneu" class="form-control postingText"
+                                    value="{{data.Title}}" />
+                                <span class="help-block">
+                                    Dê um título que descreva bem o que deseja
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Post Description -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="postTextArea">Descrição: *</label>
+                            <div class="col-md-8">
+                                <textarea class="form-control" id="postTextArea" name="postingDescription" placeholder="Insira detalhadamente as especificações do que deseja"
+                                    class="postingText"></textarea>
+                                <!-- Informa words limitation -->
+                                Limite de <span id="word_left">50</span> palavras. Palavras digitadas: <span id="display_count">0</span>.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- Option (Condition) -->
+                            <label class="col-md-3 control-label" for="condition">Qual a condição? *</label>
+                            <div class="col-md-4">
+                                <label class="radio-inline" for="condition-0">
+                                        <input type="radio" id="condition-0" name="condition" value="1" />
+                                        Novo
+                                    </label>
+                                <label class="radio-inline" for="condition-1">
+                                        <input type="radio" id="condition-1" name="condition" value="2" />
+                                        Usado
+                                    </label>
+                                <label class="radio-inline" for="condition-2">
+                                        <input type="radio" id="condition-2" name="condition" value="3" checked />
+                                        Indiferente
+                                    </label>
+                            </div>
+
+                            <!-- Option (Locales) -->
+                            <div id="localesFilter" class="hidden">
+                                <label class="col-md-2 col-xs-12 col-sm-2 control-label" for="btnLocales">Localidades:</label>
+                                <div class="col-md-3 col-xs-4 col-sm-3">
+                                    <button class="btn btn-default" id="btnLocales" onclick="openPostingLocales(); return false;" type="button">
+                                        Localidades <span class="badge">0</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <!-- Option (Priority) -->
+                            <label class="col-md-3 control-label" for="priority">Prioridades: *</label>
+                            <div class="col-md-4">
+                                <label class="checkbox-inline" for="priority-0">
+                                    <input type="checkbox" id="priority-0" value="0" />
+                                    Menor Preço
+                                </label>
+                                <label class="checkbox-inline" for="priority-1">
+                                    <input type="checkbox" id="priority-1" value="1" />
+                                    Prazo de Entrega
+                                </label>
+                            </div>
+
+                            <!-- Option (Quantity) -->
+                            <div>
+                                <label class="col-md-2 col-xs-12 col-sm-2 control-label">Quantidade:</label>
+                                <div class="col-md-2 col-xs-5 col-sm-3">
+                                    <input class="form-control col-md-2" id="txtBoxQty" name="quantity" type="number" placeholder="Qde por Local" value="1" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Option (Expiration Date) -->
+                        <div id="expiryDateDiv" class="form-group hidden">
+                            <label class="col-md-3 control-label">Expira em:<span class="required">*</span></label>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input id="txtBoxExpiryDate" type="text" class="form-control" />
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Image files -->
+                        {{#if data.Files}}
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Imagens salvas:</label>
+                            <div class="col-md-8">
+                                {{#each data.Files}}
+                                <!-- each image file -->
+                                <div class="col-sm-6 col-md-3">
+                                    <div class="img-wrap">
+                                        <span class="close" onclick="javascript: deleteImage(this); return false;">&times;</span>
+                                        <a href="/uploads/{{@root.data.UserId}}/posts/{{@root.data.PostingId}}/large/{{filename}}" target="_blank" class="thumbnail">
+                                            <img src="/uploads/{{@root.data.UserId}}/posts/{{@root.data.PostingId}}/thumbnail/{{stringFilename filename}}" alt="{{filename}}" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <!-- each image file -->
+                                {{/each}}
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        <!-- Image upload -->
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="inputImages">Imagens: <small>(Opcional)</small></label>
+                            <div class="col-md-8">
+                                <input id="inputImages" name="images" type="file" multiple class="file-loading" />
+                                <span class="help-block">Com uma imagem, quem for te ofercer, saberá exatamente o que deseja. Limite 5 imagens.</span>
+                            </div>
+                        </div>
+
+                        <!-- Action buttons -->
+                        <div class="form-group">
+                            <div class="col-xs-11 text-right">
+                                <div class="btn-group">
+                                    <button id="btnCancel" class="btn btn-default btn-toolbar">
+                                        <i class="glyphicon glyphicon-chevron-left"></i> Voltar
+                                    </button>
+                                    <button class="btn btn-orange btn-toolbar getPlans hidden">Anuncie de maneira especial</button>
+                                    <button id="btnSavePost" type="submit" class="btn btn-primary btn-toolbar">
+                                        Publicar
+                                    </button>
+                                    <!-- Delete button -->
+                                    {{#if data.PostingId}}
+                                    <button onclick="javascript: deletePost(this); return false;" class="btn btn-danger btn-toolbar">
+                                        Excluir
+                                    </button>
+                                    <!-- Delete button -->
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- keywords (hidden items) -->
+                        <div class="hidden">
+                            <input data-role="tagsinput" disabled id="txtBoxKeywords" readonly />
+                        </div>
+
+                    </fieldset>
+                </form>
+
+                <!-- form -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Locales panel -->
+<div id="localesModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header modal-header-info">
+                <button class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Localidades</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Caro(a) {{user.DisplayName}}, escolha abaixo o estado, cidade e quantidade onde deseja realizar a sua compra.
+                </p>
+
+                <form class="form-inline">
+                    <fieldset>
+                        <legend>Escolha e insira suas localidades</legend>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="select2States" class="control-label">
+                                    Estados: <span class="glyphicon glyphicon-question-sign"
+                                                data-content="Primeiramente, escolha o estado, em seguida escolha a cidade."
+                                                title="Estado"></span>
+                                </label>
+                                <select class="form-control" data-content="Favor escolher o estado." data-placeholder="Escolha o Estado" id="select2States"
+                                    style="width: 100%;" title="Estado">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="select2Cities" class="control-label">
+                                    Cidades: <span class="glyphicon glyphicon-question-sign"
+                                                data-content="Após escolher o estado, escolha a cidade e clique em adicionar localidade."
+                                                title="Cidades"></span>
+                                </label>
+                                <select class="form-control col-xs-12" data-content="Favor escolher a Cidade." data-placeholder="Escolha a Cidade" disabled
+                                    id="select2Cities" style="width: 100%;" title="Cidade">
+                                    <option></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div style="padding-top: 15px;">&nbsp;</div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="txtBoxLocaleQty" class="control-label">
+                                    Quantidade para essa localidade: <span class="glyphicon glyphicon-question-sign"
+                                                                        data-content="Insira a quantidade de itens que o anúncio se refere (mímimo 1)."
+                                                                        title="Estado"></span>
+                                </label>
+                                <input class="form-control" type="number" id="txtBoxLocaleQty" value="1" />
+                            </div>
+                        </div>
+
+                        <button class="btn btn-primary" id="btnAddLocale">Adicionar</button> &nbsp;
+                        <span id="localesCount"></span>
+                        <span class="text-success"></span>
+
+                        <div style="margin-top: 15px;">
+                            <select id="selectLocales" multiple="multiple" title="Escolha o estado então a cidade"></select>
+                        </div>
+
+                        <button id="btnCloseLocales" class="btn btn-danger pull-right hidden" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">Fechar</span></button>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Locales panel close -->
+
+<!-- Fill posting data into javascript -->
+<script>
+    let postingData = "{{json data}}".replace(/&quot;/g, '"');
+
+</script>

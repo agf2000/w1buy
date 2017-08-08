@@ -1,0 +1,230 @@
+<div class="container container-fluid">
+    <div class="row">
+        <div style="padding-top: 15px;" class="hidden-xs"></div>
+        <div class="hidden-xs">
+            {{>account}}
+        </div>
+        <hr>
+        <!-- Simple post content example. -->
+        <div class="panel panel-default">
+            <div class="panel-body inbox">
+                <!--message list-->
+                <!-- ko ifnot: messages().length -->
+                <h3>
+                    Não há Mensagens</h3>
+                <!-- /ko -->
+                <!-- ko if: messages().length -->
+                <h3>
+                    Mensagens</h3>
+                <!-- /ko -->
+                <div class="table-responsive" data-bind="visible: messages().length">
+                    <table class="table table-striped table-hover refresh-container pull-down">
+                        <thead class="hidden-xs">
+                            <tr>
+                                <td class="col-sm-3">
+                                    <strong>Data</strong>
+                                </td>
+                                <td class="col-sm-5">
+                                    <strong>De</strong>
+                                </td>
+                                <td class="col-sm-4 hidden-xs">
+                                    <strong>Assunto</strong>
+                                </td>
+                                <td class="col-sm-1"></td>
+                            </tr>
+                        </thead>
+
+                        <tbody data-bind="foreach: messages">
+                            <tr data-bind="click: openComments.bind($data, $index()), css: (NewMessage ? 'bg-green' : '')" style="cursor: pointer;">
+                                <td class="col-sm-3 col-xs-4"><span data-bind="html: moment(ModifiedOnDate).format('lll')"></span></td>
+                                <td class="col-sm-5">
+                                    <span data-bind="html: ((FromUser.toLowerCase().indexOf('w1buy') !== -1) ? 'W1Buy (Administração)' : FromUser + ' - ' + SenderCity + ' (' + SenderRegion + ')')"></span>
+                                </td>
+                                <td class="col-sm-4 hidden-xs">
+                                    <span data-bind="html: Subject + ' (ID: ' + MsgId + ')'"></span>
+                                </td>
+                                <td class="col-sm-1">
+                                    <span data-bind="css: (NewMessage ? 'fa fa-check pull-right message-status' : '')"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="panel-body detail">
+                <div class="col-xs-12">
+                    <h4>
+                        <a href="javascript:;" onclick="getMessages(); return false;" class="closeBtn">Mensagens</a> &gt;
+                        <a href="javascript:;" id="subjectHeader" title="Assunto">Assunto</a>
+                    </h4>
+                </div>
+                <div class="col-md-7">
+                    <div id="priorityValueText"></div>
+                    <div id="priorityDeliveryText"></div>
+                    <div id="fromWhoContainer" class="small">
+                        <strong id="fromWho"></strong><span id="sentOn" class="pull-right"></span>
+                        <div id="rateYoContainer"></div>
+                    </div>
+                </div>
+                <div id="buttonsContainer" class="col-md-5">
+                    <div class="pull-right">
+                        <button class="btn btn-sm btn-default" aria-hidden="true" onclick="getMessages(); return false;">
+                            <i class="fa fa-arrow-circle-left fa-1x"></i>
+                            Voltar
+                        </button>
+                        <button id="btnRemoveMsg" class="btn btn-sm btn-danger" title="Excluir mensagem">
+                            <i class="fa fa-trash-o"></i>
+                        </button>
+                        <button id="answerBtn" class="btn btn-sm btn-primary" title="Excluir mensagem" onclick="javascript: openMsgModal(this)">
+                            <i class="fa fa-reply"></i> Responder
+                        </button>
+                        <button id="btnSendRequest" class="btn btn-sm btn-info mt10 hidden">
+                            Ver Contato
+                        </button>
+                        <button id="btnSendContact" class="btn btn-sm btn-info hidden">
+                            Enviar Contato
+                        </button>
+                        <button id="btnSendPurchase" class="btn btn-sm btn-info hidden">
+                            Concluir Negociação
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <hr>
+                </div>
+                <div class="col-xs-12">
+                    <!--message body-->
+                    <ul class="timeline" data-bind="foreach: comments">
+                        <!-- timeline time label -->
+                        {{!--
+                        <li class="time-label">
+                            <span class="bg-blue" data-bind="text: moment(CreatedOnDate).format('DD MMMM YYYY')">
+                                10 Feb. 2014
+                            </span>
+                        </li>--}}
+                        <!-- /.timeline-label -->
+
+                        <!-- timeline item -->
+                        <li>
+                            <!-- timeline icon -->
+                            <i class="fa fa-comments bg-yellow" data-bind="css: ($index() % 2 == 0 ? 'fa fa-comments bg-yellow' : 'fa fa-comments bg-blue')"></i>
+                            <div class="timeline-item">
+                                <h3 class="timeline-header hidden" data-bind="text: ((FromUser.toLowerCase().indexOf('w1buy') !== -1) ? 'W1Buy (Administração)' : FromUser)">
+                                </h3>
+                                <span class="time" data-bind="html: '<i class=fa fa-clock-o></i> ' + moment(CreatedOnDate).fromNow()"></span>
+
+                                <div class="timeline-body" data-bind="html: CommentText">
+                                </div>
+
+                                {{!--
+                                <div class="timeline-footer">
+                                    <a class="btn btn-primary btn-xs">
+                                        
+                                    </a>
+                                </div>--}}
+                            </div>
+                        </li>
+                    </ul>
+                    <!--/message body-->
+                </div>
+                <div class="col-xs-12 clearfix">
+                    <hr>
+                </div>
+                <div class="col-xs-12">
+                    <div id="imagesContainer" class="col-md-11 col-md-offset-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input type="hidden" id="hiddenPostingId" name="postingId" />
+<input type="hidden" class="hiddenMsgId" name="msgId" />
+<input type="hidden" id="hiddenOwnerId" name="ownerId" />
+<input type="hidden" id="hiddenFromUserId" />
+<input type="hidden" id="hiddenSubject" name="subject" />
+
+<!-- Mail form panel -->
+<div aria-hidden="true" aria-labelledby="messageModalLabel" role="dialog" tabindex="-1" id="messageModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Compondo Mensagem</h4>
+            </div>
+            <div class="modal-body">
+                <form id="commentForm" role="form" class="form-horizontal">
+
+                    <input type="hidden" name="folder" value="chats" />
+                    <input type="hidden" class="hiddenMsgId" name="folderId" />
+
+                    <div id="attachmentsDiv" class="form-group">
+                        <label class="col-md-2 control-label" for="attachments">Anexos:</label>
+                        <div class="col-md-10">
+                            <input id="attachments" type="file" name="files" multiple>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="messageTextarea">Mensagem:</label>
+                        <div class="col-md-10">
+                            <textarea id="messageTextarea" rows="10" cols="30" name="commentText" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <div class="text-right">
+                                <button id="btnSendComment" class="btn btn-primary"><i class="fa fa-send"></i>&nbsp; Enviar</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Mail form panel close -->
+
+<!-- Rating Form Panel -->
+<div aria-hidden="true" aria-labelledby="ratingFormLabel" role="dialog" tabindex="-1" id="ratingFormModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-info">
+                <button aria-hidden="true" data-dismiss="modal" class="close" type="button">×</button>
+                <h4 class="modal-title">Avalie o usuário</h4>
+            </div>
+            <div class="modal-body">
+                <form id="ratingForm" role="form" class="form-horizontal">
+                    <div class="row">
+                        <div class="col-xs-10 col-md-offset-1">
+                            <div class="form-group">
+                                <div id="ratingContainer">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <textarea class="form-control" id="ratingComments" placeholder="(Opcional) Digite seus comentários aqui..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="text-right">
+                                    <button id="btnSaveRating" class="btn btn-primary"><i class="fa fa-check"></i>&nbsp; Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div id="replies">
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Rating form panel close -->

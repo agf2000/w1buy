@@ -1,0 +1,120 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="row" style="margin: 5px 0 15px 0;">
+            <div class="col-xs-12 col-lg-8 col-lg-offset-2">
+                <div class="text-center">
+                    <h3>Olá {{user.DisplayName}},</h3>
+                    <h4>vejo que deseja VENDER</h4>
+                    <img id="imgSalesman" src="images/start_salesman.png" alt="Vendedor" width="50%">
+                    <h4>ENCONTRE AQUI O COMPRADOR</h4>
+                </div>
+                <div style="padding: 7px;"></div>
+                <h4 class="text-center">Digite abaixo o que tem para oferecer e encontre UM COMPRADOR</h4>
+                <div class="left-inner-addon ">
+                    <i class="glyphicon glyphicon-search"></i>
+                    <input autocomplete="off" id="inputSearch" type="text" class="form-control input-lg" placeholder="Digite sua busca" />
+                </div>
+            </div>
+        </div>
+
+        <div id="postingsList" class="row">
+            <div class="col-md-3 col-xs-12">
+                <div id="localesList" class="accordion">
+                    <!-- panel-group -->
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title text-orange">
+                                    <span class="text-orange" data-bind="html: 'Cidades onde estão comprando... ' + query()"></span>
+                                </h4>
+                            </div>
+                            <div id="localesPanel" class="panel-collapse collapse in">
+                                <div class="panel-body" id="postingRegions">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- accordion-->
+            <div class="col-md-9 col-xs-12">
+                <div id="searchResults" class="panel panel-default">
+                    <div class="panel-heading">
+                        <span data-bind="html: 'Filtrando... ' + query() + ' em ' + chosen()">Filtrando...</span>
+                    </div>
+                    <div class="panel-body">
+                        <ul data-bind="foreach: items">
+                            <li>
+                                <div class="row carousel-row">
+                                    <div class="slide-row">
+                                        <div data-bind="attr: { id: 'carousel-' + PostingId }" class="carousel slide slide-carousel" data-ride="carousel">
+                                            <!-- Indicators -->
+                                            <ol class="carousel-indicators">
+                                                <!-- ko foreach: Files -->
+                                                <li data-bind="attr: { 'data-target': '#carousel-' + $parent.PostingId, 'data-slide-to': $index }, css: ($index() === 0 ? 'active' : '')"></li>
+                                                <!-- /ko -->
+                                            </ol>
+
+                                            <!-- Wrapper for slides -->
+                                            <div class="carousel-inner">
+                                                <!-- ko foreach: Files -->
+                                                <div data-bind="css: ($index() === 0 ? 'item active frame' : 'item frame')">
+                                                    <img data-bind="click: openImages.bind($data), attr: { src: 'uploads/' + $parent.UserId + '/posts/' + $parent.PostingId + '/thumbnail/' + FileName }"
+                                                        src="" alt="Imagem" height="130" />
+                                                </div>
+                                                <!-- /ko -->
+                                                <!-- ko ifnot: Files -->
+                                                <div class="item active frame">
+                                                    <img src="images/no-image.jpg" alt="Image">
+                                                </div>
+                                                <!-- /ko -->
+                                            </div>
+                                        </div>
+                                        <div class="slide-content">
+                                            <h4 data-bind="attr: { href: '/busca?id=' + PostingId }, html: Title">
+                                            </h4>
+                                            <p data-bind="html: PostingDescription">
+                                            </p>
+                                            <dl data-bind="foreach: Locales">
+                                                <dt data-bind="text: City + ' Qde: ' + Math.max(0, Quantity) + '; &nbsp;'"></dt>
+                                            </dl>
+                                        </div>
+                                        <div class="slide-footer">
+                                            <div class="pull-right buttons">
+                                                <a href="#" data-bind="attr: { href: 'anuncios/' + PostingId + '/' + my.userInfo.UserID }" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-thumbs-up"></i>&nbsp; Fazer uma oferta</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Gallery panel -->
+<div id="galleryModal" class="modal fade" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <!-- handlebars partials gallery -->
+                {{>gallery}}
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<!-- Gallery panel close -->
+
+<script>
+    let userInfo = "{{json user}}".replace(/&quot;/g, '"');
+
+</script>

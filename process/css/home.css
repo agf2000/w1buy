@@ -1,0 +1,55 @@
+.sp-buttons {
+	display: none;
+}
+
+
+/* Header Content */
+
+#header .header-content,
+#header .header-content a {
+	color: #fff;
+}
+
+.ie #header .header-content.header-overlay40 {
+	background: url(../images/ie-bg-header-overlay40.png) repeat top left;
+}
+
+#header .header-content.header-overlay60 {
+	background-color: rgba(0, 0, 0, .6);
+}
+
+.ie #header .header-content.header-overlay60 {
+	background: url(../images/ie-bg-header-overlay60.png) repeat top left;
+}
+
+#header .header-content .header-content-feature {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+#header .header-content .header-content-feature .fa {
+	font-size: 40px;
+	margin-bottom: 10px;
+}
+
+#header .header-content .header-content-feature p {
+	font-size: 13px;
+	line-height: 18px;
+	margin: 8px 0px 0px;
+}
+
+#header .header-content .header-content-overlay {
+	background-color: rgba(0, 0, 0, .5);
+	padding-top: 15px;
+}
+
+.ie #header .header-content .header-content-overlay {
+	background: url(../images/ie-bg-header-content-overlay.png) repeat top left;
+}
+
+#header .header-text-left h1,
+#header .header-text-center h1,
+#header .header-text-right h1 {
+	font-size: 44px;
+	line-height: 58px;
+}
