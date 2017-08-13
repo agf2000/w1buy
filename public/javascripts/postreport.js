@@ -3,6 +3,8 @@ $(() => {
     kendo.culture("pt-BR");
     kendo.culture().calendar.firstDay = 1;
 
+    my.userInfo = JSON.parse(userInfo);
+
     function detailInit(e) {
         var detailRow = e.detailRow;
 
@@ -71,7 +73,7 @@ $(() => {
     });
 
     $('#dataGrid').kendoGrid({
-        // autoBind: false,
+        autoBind: false,
         dataSource: postsDataSource,
         groupable: true,
         detailTemplate: kendo.template($("#tmplPost").html()),
@@ -129,15 +131,21 @@ $(() => {
         }
     });
 
-    // if (my.userInfo.Roles != undefined) {
-    //     var match = ko.utils.arrayFirst(my.userInfo.Roles, function (item) {
-    //         return item == 'Administrators';
-    //     });
+    if (my.userInfo.Roles != undefined) {
+        var match = my.userInfo.Roles.find(function (item) {
+            let result = false;
+            if (item.rolename == 'Administrators') {
+                result = true;
+            };
+            return result;
+        });
 
-    //     if (match) {
-    //         $('#postsGrid').data('kendoGrid').dataSource.read();
-    //     }
-    // }
+        if (match) {
+            $('#dataGrid').data('kendoGrid').dataSource.read();
+        } else {
+            window.location.href = '/';
+        }
+    }
 
     // $('#btnGetPosts').click(function (e) {
     //     if (e.clientX === 0) {

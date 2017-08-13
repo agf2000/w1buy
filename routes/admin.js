@@ -5,7 +5,7 @@ const postingController = require("../controllers/postingController.js");
 
 // Reports
 // Postings
-router.get('/postreport', function (req, res) {
+router.get('/postreport', ensureAuthenticated, function (req, res) {
     res.render('./admin/postreport', {
         title: 'Admin :: Anúncios',
         layout: 'admin',
@@ -20,7 +20,7 @@ router.get('/postreport', function (req, res) {
     });
 });
 
-router.get('/getPosts', function (req, res) {
+router.get('/getPosts', ensureAuthenticated, function (req, res) {
     postingController.getPosts(req, res, 0, function (records) {
         if (!records.error) {
             res.json({
