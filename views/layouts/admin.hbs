@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="en"><![endif]-->
+<!--[if (gte IE 10)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+
+    <!-- Your Basic Site Informations -->
+    <title>{{title}}</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="W1Buy." />
+    <meta name="keywords" content="W1Buy" />
+    <meta name="author" content="AGF" />
+
+    <!-- Mobile Specific Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!-- Fonts -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins:400,300,600,700" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/pace-js/themes/pace-theme-flash.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/slider-pro/css/slider-pro.min.css" />
+    <link rel="stylesheet" type="text/css" href="/lib/fancybox/css/jquery.fancybox.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/kendo/2017.1.223/kendo.common.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/kendo/2017.1.223/kendo.flat.min.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+
+    <!-- Custom Colors -->
+    <!--<link rel="stylesheet" type="text/css" href="css/colors/blue/color.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="css/colors/green/color.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="css/colors/pink/color.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="css/colors/purple/color.css" />-->
+    <!--<link rel="stylesheet" type="text/css" href="css/colors/yellow/color.css" />-->
+
+    <!--[if lt IE 9]>
+    	<script src="js/html5.js"></script>
+        <script src="js/respond.min.js"></script>
+	<![endif]-->
+
+    <!--[if lt IE 8]>
+    	<link rel="stylesheet" href="css/ie-older.css" />
+    <![endif]-->
+
+    {{#each css}}
+    <!-- dynamic css -->
+    <link rel="stylesheet" type="text/css" href="{{this}}" />
+    <!-- /dynamic css -->
+    {{/each}}
+
+    <noscript>
+        <link rel="stylesheet" type="text/css" href="/stylesheets/no-js.css" />
+    </noscript>
+
+    <!-- Favicons -->
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png" />
+
+</head>
+
+<body>
+
+    <!-- #header -->
+    <header id="header" class="page-header" style="background: url('/images/content/bg/1-cut.jpg');">
+
+        <!-- #navigation -->
+        <nav id="navigation" class="navbar">
+
+            <!-- .container -->
+            <div class="container">
+
+                <div class="navbar-brand">
+                    <img src="/images/logo.png" alt="Logo" />
+                </div>
+
+                <ul class="nav navbar-nav">
+                    <li class="active hidden-xs" style="font-size: 16px; font-style: italic;"><a name="slogan">Conectando Pessoas e Negocios!!</a></li>
+                    {{#if user}}
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							{{user.DisplayName}}
+							<b class="caret"></b>
+						</a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li>
+                                <div class="navbar-content">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h4 style="color: #000 !important;">{{user.FirstName}} {{user.LastName}}</h4>
+                                            <p class="text-muted small">
+                                                {{user.Email}}</p>
+                                            <div class="divider">
+                                            </div>
+                                            <a href="/contas/cadastro" class="btn btn-default">Meu Cadastro</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="navbar-footer">
+                                    <div class="navbar-footer-content">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#passwordChangeModal">
+                                                    <i class="fa fa-unlock-alt" aria-hidden="true"></i> Alterar Senha
+                                                </a>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <a href="/contas/logout" class="btn btn-default btn-sm pull-right"><i class="fa fa-power-off" aria-hidden="true"></i> Sair</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    {{/if}}
+                </ul>
+
+            </div>
+            <!-- .container end -->
+
+        </nav>
+        <!-- #navigation end -->
+
+        <div class="page-header-overlay">
+        </div>
+
+    </header>
+    <!-- #header end -->
+
+    <!-- .wrap-container -->
+    <div class="wrap-container20 bg-grayesh">
+
+        <!-- .container -->
+        <div class="container">
+
+            {{{body}}}
+
+        </div>
+        <!-- .container end -->
+
+    </div>
+    <!-- .padding-bottom end -->
+
+    <!-- #footer -->
+    <footer id="footer">
+
+        {{>footer}}
+
+    </footer>
+    <!-- #footer end -->
+
+    {{>passwordChange}}
+
+    <a href="#" class="scrollup" title="Back to Top!">Scroll</a>
+    <!-- Back to Top -->
+
+    <!--[if lt IE 8]>
+    	<div class="browser-notice">
+            <div class="container">
+            	<div class="text">
+                    <h1>Internet Explorer Out To Date</h1>
+                    <p>Please update your Internet Explorer browser with a newer version (Internet Explorer 8 above) now!</p>
+                    <span>You can download it <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie" target="blank">here....</a></span>
+                </div>
+            </div>
+        </div>
+	<![endif]-->
+
+    <!-- JavaScripts -->
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/lib/pace-js/js/pace.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery.easing/js/jquery.easing.min.js"></script>
+    <script type="text/javascript" src="/lib/smoothscroll/js/smoothscroll.min.js"></script>
+    <script type="text/javascript" src="/lib/response.js/js/response.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery-placeholder/js/jquery.placeholder.js"></script>
+    <script type="text/javascript" src="/lib/fitvids/js/fitvids.min.js"></script>
+    <script type="text/javascript" src="/javascripts/jquery.imgpreload.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery-waypoints/js/waypoints.min.js"></script>
+    <!--moment -->
+    <script type="text/javascript" src="/lib/moment/moment.min.js"></script>
+    <script type="text/javascript" src="/lib/moment/locale/pt-br.js"></script>
+    <script type="text/javascript" src="/lib/slider-pro/js/jquery.sliderPro.min.js"></script>
+    <script type="text/javascript" src="/lib/fancybox/js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="/lib/fancybox/helpers/js/jquery.fancybox-media.js"></script>
+    <script type="text/javascript" src="/javascripts/parallax.min.js"></script>
+    {{!--
+    <script type="text/javascript" src="/lib/jquery.counterup/js/jquery.counterup.min.js"></script> --}}
+    <script type="text/javascript" src="/lib/isotope-layout/js/isotope.pkgd.min.js"></script>
+    <script type="text/javascript" src="/javascripts/script.js"></script>
+    <script type="text/javascript" src="/lib/sweetalert2/js/sweetalert2.min.js"></script>
+    <!-- Kendo-UI -->
+    <script type="text/javascript" src="/javascripts/kendo/2017.1.223/kendo.web.min.js"></script>
+    <script type="text/javascript" src="/javascripts/kendo/2017.1.223/cultures/kendo.culture.pt-BR.min.js"></script>
+    <script type="text/javascript" src="/javascripts/kendo/2017.1.223/messages/kendo.messages.pt-BR.min.js"></script>
+    <!-- Socket.IO -->
+    <script src="/socket.io/socket.io.js"></script>
+
+    {{#each script}}
+    <!-- dynamic scripts -->
+    <script src="{{this}}"></script>
+    <!-- /dynamic scripts -->
+    {{/each}}
+
+</body>
+
+</html>

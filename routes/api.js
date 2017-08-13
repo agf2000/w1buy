@@ -113,12 +113,26 @@ router.post('/addPosting', ensureAuthenticated, upload.array('images', 5), funct
 // Posting update
 router.put('/updatePosting', ensureAuthenticated, upload.array('images', 5), function (req, res, next) {
     if (req.files[0]) {
+        let pathLarge = path.join(__dirname, '..', 'data/uploads/' + req.body.ownerId + '/posts/' + req.body.postingId + '/large');
+        let pathThumb = path.join(__dirname, '..', 'data/uploads/' + req.body.ownerId + '/posts/' + req.body.postingId + '/thumbnail');
+        fse.mkdirsSync(pathLarge);
+        fse.mkdirsSync(pathThumb);
+
         thumb({
-            source: '../data/uploads/' + req.body.userId + '/' + req.body.folder + '/' + req.body.folderId + '/large', // could be a filename: dest/path/image.jpg 
-            destination: '../data/uploads/' + req.body.userId + '/' + req.body.folder + '/' + req.body.folderId + '/thumbnail',
+            source: tempPath,
+            destination: pathThumb,
             width: 160
-        }).then(function (files, err, stdout, stderr) {
-            postingController.updatePosting(req, res, req.body, (req.files ? req.files : null));
+        }).then(function (files, error, stdout, stderr) {
+            if (error) return console.error(error)
+
+            // Move files into posting folders                
+            fse.move(tempPath, pathLarge, {
+                overwrite: false
+            }, err => {
+                if (err) return console.error(err)
+
+                postingController.updatePosting(req, res, req.body, (req.files ? req.files : null));
+            });
         }).catch(function (e) {
             console.log('Error', e.toString());
         });
@@ -141,6 +155,15 @@ router.get('/getPostingsLocales', function (req, res) {
 router.get('/getPostings', function (req, res) {
     postingController.getPostings(req, res, req.query.portalId || 0, req.query.term || "", req.query.localeId || "", req.query.pageIndex || 1, req.query.pageSize || 10);
 });
+
+// Get post by id
+router.get('/post', function (req, res) {
+    postingController.getPost(req, res, req.params.id, req.params.userId, function (data) {
+        if (!data.error) {
+            res.json(data);
+        }
+    });
+ });
 
 // Get postings locales count by keywords or all
 router.get('/getPostingsLocalesCount', function (req, res) {

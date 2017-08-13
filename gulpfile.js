@@ -242,6 +242,15 @@ gulp.task('vendors', function () {
 
     gulp.src('node_modules/pace-js/pace.min.js')
         .pipe(gulp.dest(app + '/lib/pace-js/js'));
+
+    // gulp.src('node_modules/datatables/media/css/jquery.dataTables.min.css')
+    //     .pipe(gulp.dest(app + '/lib/datatables/css'));
+
+    // gulp.src('node_modules/datatables/media/images/*')
+    //     .pipe(gulp.dest(app + '/lib/datatables/images'));
+
+    // gulp.src('node_modules/datatables/media/js/jquery.dataTables.min.js')
+    //     .pipe(gulp.dest(app + '/lib/datatables/js'));
 });
 
 gulp.task('imageMin', function () {

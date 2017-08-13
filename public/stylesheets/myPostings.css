@@ -1,0 +1,177 @@
+#myPostings ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+
+/*REQUIRED*/
+
+.carousel-row {
+    margin-bottom: 20px;
+    height: 140px;
+}
+
+.slide-row {
+    padding: 0;
+    background-color: #ffffff;
+    min-height: 130px;
+    border-bottom: 1px dashed #ddd;
+    overflow: hidden;
+    height: auto;
+    position: relative;
+}
+
+.slide-carousel {
+    width: 30%;
+    float: left;
+    display: inline-block;
+}
+
+.slide-carousel .carousel-indicators {
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    width: 100%;
+    left: 0;
+    margin: 0;
+}
+
+.slide-carousel .carousel-indicators li {
+    border-radius: 0;
+    width: 20px;
+    height: 6px;
+}
+
+.slide-carousel .carousel-indicators .active {
+    margin: 1px;
+}
+
+.slide-content {
+    position: absolute;
+    top: 0;
+    left: 30%;
+    display: block;
+    float: left;
+    width: 70%;
+    max-height: 76%;
+    padding: 0 2% 2% 2%;
+    margin-top: 0;
+    overflow-y: auto;
+}
+
+.slide-content h4 {
+    margin-bottom: 3px;
+    margin-top: 0;
+    padding: 0;
+}
+
+.slide-footer {
+    margin: 20px 10px 0 0;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 2%;
+}
+
+
+/* Scrollbars */
+
+.slide-content::-webkit-scrollbar {
+    width: 5px;
+}
+
+.slide-content::-webkit-scrollbar-thumb:vertical {
+    margin: 5px;
+    background-color: #999;
+    -webkit-border-radius: 5px;
+}
+
+.slide-content::-webkit-scrollbar-button:start:decrement,
+.slide-content::-webkit-scrollbar-button:end:increment {
+    height: 5px;
+    display: block;
+}
+
+.frame {
+    height: 110px;
+    /*can be anything*/
+    width: 100%;
+    /*can be anything*/
+    position: relative;
+}
+
+.slide-carousel img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 0;
+    bottom: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+@media only screen and (min-width: 360px) {
+    .frame {
+        width: 100%;
+    }
+    .carousel-row {
+        height: 150px;
+    }
+    .slide-row {
+        min-height: 140px;
+    }
+    .slide-content {
+        left: 20%;
+        width: 80%;
+    }
+    .slide-carousel {
+        width: 20%;
+    }
+    .slide-footer {
+        height: 20%;
+    }
+    .slide-content {
+        max-height: 70%;
+    }
+}
+
+@media only screen and (min-width: 490px) {
+    .carousel-row {
+        height: 160px;
+    }
+    .slide-row {
+        min-height: 150px;
+    }
+    .slide-content {
+        left: 20%;
+        width: 80%;
+    }
+    .slide-carousel {
+        width: 20%;
+    }
+    .slide-footer {
+        height: 20%;
+    }
+    .slide-content {
+        max-height: 70%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .slide-content {
+        left: 15%;
+        width: 85%;
+    }
+    .slide-carousel {
+        width: 15%;
+    }
+    .slide-footer {
+        height: 20%;
+    }
+    .slide-content {
+        max-height: 80%;
+    }
+}

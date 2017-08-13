@@ -1,0 +1,9 @@
+.k-grid-header .k-header>.k-link,
+.k-header,
+.k-treemap-title {
+    color: #fff !important;
+}
+
+.k-header>.k-link:hover {
+    background: none !important;
+}

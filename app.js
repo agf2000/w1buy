@@ -71,10 +71,13 @@ app.get('*', function (req, res, next) {
 const home = require('./routes/home');
 app.use('/', home);
 
-// For testing purpose
-// app.get('/', function (req, res) {
-// 	res.sendFile(path.join(__dirname + '/index.html'));
-// });
+// Admin route
+let admin = require('./routes/admin');
+app.use('/admin', admin);
+
+// Report route
+let report = require('./routes/report');
+app.use('/report', report);
 
 // Users route
 let users = require('./routes/users');
