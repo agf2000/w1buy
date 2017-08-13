@@ -81,15 +81,13 @@
                     {{#unless data.MsgWaiting}}
                     <a id="lnkMakeOffer" href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#msgFormModal">
                         <i class="fa fa-thumbs-o-up"></i>&nbsp; Faça sua Oferta
-                    </a>
-                    {{/unless}}
+                    </a> {{/unless}}
 
                     <!-- Post owner -->
                     {{#ifCond data.Owner my.userInfo.UserID}}
                     <a id="lnkEditPost" href="/anuncios/editar/{{data.PostingId}}/{{data.UserId}}" class="btn btn-primary pull-right">
                         <i class="fa fa-edit"></i>&nbsp; Editar Anúncio
-                    </a>
-                    {{/if}}
+                    </a> {{/ifCond}}
                 </div>
 
                 <div class="clearfix"></div>
