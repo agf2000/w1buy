@@ -77,17 +77,19 @@
                     <br />
                     <a href="#" class="btn btn-default pull-left" onclick="window.location.href = '/contas/minhaconta'; return false;"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp; Fechar</a>
 
+                    <!-- Post owner -->
+                    {{#if data.Owner my.userInfo.UserID}}
+                    <a id="lnkEditPost" href="/anuncios/editar/{{data.PostingId}}/{{data.UserId}}" class="btn btn-primary pull-right">
+                        <i class="fa fa-edit"></i>&nbsp; Editar Anúncio
+                    </a>
+                    {{else}}
                     <!-- The user may send any message if there are no waiting answers -->
                     {{#unless data.MsgWaiting}}
                     <a id="lnkMakeOffer" href="#" class="btn btn-primary pull-right" data-toggle="modal" data-target="#msgFormModal">
                         <i class="fa fa-thumbs-o-up"></i>&nbsp; Faça sua Oferta
-                    </a> {{/unless}}
-
-                    <!-- Post owner -->
-                    {{#if data.Owner}}
-                    <a id="lnkEditPost" href="/anuncios/editar/{{data.PostingId}}/{{data.UserId}}" class="btn btn-primary pull-right">
-                        <i class="fa fa-edit"></i>&nbsp; Editar Anúncio
-                    </a> {{/if}}
+                    </a>
+                    {{/unless}}
+                    {{/if}}
                 </div>
 
                 <div class="clearfix"></div>
