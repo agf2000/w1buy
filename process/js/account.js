@@ -113,7 +113,9 @@ $(function () {
             });
 
             if (match) {
-                window.location.href = '/admin';
+                $('a[href="/admin"]').removeClass('hidden');
+                $('a[href="/admin/anuncios"]').removeClass('hidden');
+                $('a[href="/admin/usuarios"]').removeClass('hidden');
             } else {
                 $('a[href="/anuncios"]').removeClass('hidden');
                 $('a[href="/anuncios/novo"]').removeClass('hidden');
@@ -130,7 +132,22 @@ $(function () {
             });
 
             if (match) {
-                window.location.href = '/admin';
+                $('a[href="/admin"]').removeClass('hidden');
+                $('a[href="/admin/anuncios"]').removeClass('hidden');
+                $('a[href="/admin/usuarios"]').removeClass('hidden');
+
+                if (!$('a[href="/contas/meusanuncios"]').hasClass('hidden')) {
+                    $('a[href="/contas/meusanuncios"]').addClass('hidden');
+                }
+
+                if (!$('a[href="/contas/mensagens"]').hasClass('hidden')) {
+                    $('a[href="/contas/mensagens"]').addClass('hidden');
+                }
+
+                if (!$('#usersHome').hasClass('hidden')) {
+                    $('#usersHome').addClass('hidden');
+                }
+
             }
         }
     }

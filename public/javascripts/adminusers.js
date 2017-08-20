@@ -484,6 +484,35 @@ $(() => {
                 }
             }
         }
+    } else {
+        if (my.userInfo.Roles != undefined) {
+            var match = my.userInfo.Roles.find(function (item) {
+                let result = false;
+                if (item.rolename == 'Administrators') {
+                    result = true;
+                };
+                return result;
+            });
+
+            if (match) {
+                $('a[href="/admin"]').removeClass('hidden');
+                $('a[href="/admin/anuncios"]').removeClass('hidden');
+                $('a[href="/admin/usuarios"]').removeClass('hidden');
+
+                if (!$('a[href="/contas/meusanuncios"]').hasClass('hidden')) {
+                    $('a[href="/contas/meusanuncios"]').addClass('hidden');
+                }
+
+                if (!$('a[href="/contas/mensagens"]').hasClass('hidden')) {
+                    $('a[href="/contas/mensagens"]').addClass('hidden');
+                }
+
+                if (!$('#usersHome').hasClass('hidden')) {
+                    $('#usersHome').addClass('hidden');
+                }
+
+            }
+        }
     }
 
 });
