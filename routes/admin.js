@@ -15,6 +15,7 @@ router.get('/', ensureAuthenticated, function (req, res) {
         ],
         script: [
             '/javascripts/utilities.js',
+            '/javascripts/account.js',
             '/javascripts/admin.js'
         ]
     });
@@ -32,6 +33,7 @@ router.get('/anuncios', ensureAuthenticated, function (req, res) {
         ],
         script: [
             '/javascripts/utilities.js',
+            '/javascripts/account.js',
             '/javascripts/adminposts.js'
         ]
     });
@@ -53,6 +55,7 @@ router.get('/usuarios', ensureAuthenticated, function (req, res) {
             '/lib/select2/i18n/pt-BR.js',
             '/lib/jquery-mask/js/jquery.mask.min.js',
             '/javascripts/utilities.js',
+            '/javascripts/account.js',
             '/javascripts/adminusers.js'
         ]
     });
