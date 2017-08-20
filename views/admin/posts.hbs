@@ -18,8 +18,7 @@
                     <div class="col-xs-12">
                         <div class="gallery col-xs-2">
                             # if (Files) { # # var files = JSON.parse(Files.replace(/\,(?!\s*[\{\[\"\'\w])/g, '')); # # for (var i = 0; i
-                            <
-                                files.length; i++) { # <img src="#= '../uploads/' + UserId + '/posts/' + PostingId + '/thumbnail/' + files[i].FileName.replace(/(\.[\w\d_-]+)$/i, '_thumb$1') #"
+                            < files.length; i++) { # <img src="#= '../uploads/' + UserId + '/posts/' + PostingId + '/thumbnail/' + files[i].FileName.replace(/(\.[\w\d_-]+)$/i, '_thumb$1') #"
                             /> # } # # } # # if (!Files) { #
                             <img src="/images/no-image.png" /> # } #
                         </div>
@@ -46,8 +45,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    let userInfo = "{{json user}}".replace(/&quot;/g, '"');
-
-</script>
