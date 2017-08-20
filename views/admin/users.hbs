@@ -1,0 +1,136 @@
+<div class="container">
+    <div style="padding-top: 15px;">
+    </div>
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <h3>Usuários Cadastrados</h3>
+                    <div id="dataGrid"></div>
+                </div>
+                <script type="text/x-kendo-template" id="tmplUser">
+                    <form class="form-horizontal" data-toggle="validator" id="#= UserID + '_profileForm' #" role="form">
+                        <div class="row">
+                            <div class="col-sm-11">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtFirstName' #">Nome: </label>
+
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="#= UserID + '_txtFirstName' #" placeholder="Nome" title="Nome é obrigatório" type="text"
+                                            tabindex="1" value="#= FirstName #">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtLastName' #">Sobrenome: </label>
+
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="#= UserID + '_txtLastName' #" placeholder="Sobrenome" type="text" tabindex="2" value="#= LastName #">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtDisplayName' #">Nome no Site: </label>
+
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="#= UserID + '_txtDisplayName' #" placeholder="Nome no Site" title="Nome no site é obrigatório"
+                                            type="text" tabindex="3" value="#= DisplayName #">
+                                    </div>
+                                </div>
+
+                                <div class="form-group hidden">
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_select2Countries' #">País: </label>
+
+                                    <div class="col-sm-9">
+                                        <select data-placeholder="Escolha o País" id="#= UserID + '_select2Countries' #" style="width: 100%;" title="País">
+                                        <option></option>
+                                    </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtSSN' #">CPF: </label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" id="#= UserID + '_txtSSN' #" placeholder="CPF" title="CPF no site é obrigatório" type="text"
+                                            tabindex="4" value="#= DocId #" onchange="validateCpf(this)">
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtBoxPostalCode' #">CEP: </label>
+                                    <div class="col-sm-3">
+                                        <div class="input-group">
+                                            <input id="#= UserID + '_txtBoxPostalCode' #" type="text" class="form-control" title="CEP" placeholder="CEP" value="#= PostalCode #"
+                                                tabindex="5">
+                                            <span class="input-group-btn">
+                                            <button class="btn btn-default" id="#= UserID + '_btnPostalCode' #" type="button"><i class="glyphicon glyphicon-globe"></i></button>
+                                        </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_select2Regions' #">Estado: </label>
+                                    <div class="col-sm-3">
+                                        <select data-placeholder="Escolha o Estado" id="#= UserID + '_select2Regions' #" style="width: 100%;" title="Estado" tabindex="6">
+                                        <option></option>
+                                    </select>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_select2Cities' #">Cidade: </label>
+                                    <div class="col-sm-3">
+                                        <select data-placeholder="Escolha a Cidade" id="#= UserID + '_select2Cities' #" style="width: 100%;" title="Cidade" tabindex="7">
+                                        <option></option>
+                                    </select>
+                                        <input class="form-control hidden" id="#= UserID + '_txtCity' #" placeholder="Cidade" type="text" value="#= City #">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtBoxStreet' #">Endereço: </label>
+                                    <div class="col-sm-5">
+                                        <input id="#= UserID + '_txtBoxStreet' #" type="text" class="form-control" placeholder="Ex.: Rua João Pedro" title="Endereço"
+                                            value="#= Street #" tabindex="8">
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtAddressNumber' #">Número: </label>
+                                    <div class="col-sm-1">
+                                        <input id="#= UserID + '_txtAddressNumber' #" type="text" class="form-control" title="Número" value="#= StreetNumber #" tabindex="9">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtBoxDistrict' #">Bairro: </label>
+
+                                    <div class="col-sm-9">
+                                        <input class="form-control" id="#= UserID + '_txtBoxDistrict' #" placeholder="Bairro" type="text" value="#= District #" tabindex="10">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtTelephone' #">Telefone: </label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" id="#= UserID + '_txtTelephone' #" placeholder="Telefone" type="text" value="#= Telephone #"
+                                            tabindex="11">
+                                    </div>
+
+                                    <label class="col-sm-2 control-label" for="#= UserID + '_txtCell' #">Celular: </label>
+                                    <div class="col-sm-3">
+                                        <input class="form-control" id="#= UserID + '_txtCell' #" placeholder="Celular" type="text" value="#= Cell #" tabindex="12">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-11">
+                                    <button id="#= UserID + '_btnUpdateUser' #" class="btn btn-primary pull-right" tabindex="12">Atualizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let userInfo = "{{json user}}".replace(/&quot;/g, '"');
+
+</script>

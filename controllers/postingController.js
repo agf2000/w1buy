@@ -261,8 +261,6 @@ exports.getPosts = function (req, res, portalId, cb) {
         sqlInst += ", ('/anuncios/' + cast(p.PostingId as varchar(10)) + '/' + cast(p.UserId as varchar(10))) as Link ";
         sqlInst += "from w1buy_postings p ";
         sqlInst += "join users u on p.userid = u.userid ";
-        sqlInst += "join w1buy_postingLocales pl on p.postingid = pl.postingid "
-        sqlInst += "join w1buy_postingKeywords pk on p.postingid = pk.postingid ";
         sqlInst += "where p.portalid = " + portalId + ";";
 
         db.querySql(sqlInst, function (data, err) {
@@ -279,7 +277,7 @@ exports.getPosts = function (req, res, portalId, cb) {
         cb({
             'error': ex.message
         });
-    }
+    };
 };
 
 // Gets user posts
@@ -468,4 +466,50 @@ exports.getPost = function (req, res, postId, userId, cb) {
     } catch (ex) {
         res.json(ex.message);
     }
+};
+
+// Gets postings dates statistics
+// vscode-fold=10
+exports.getPostingsDate = function (req, res, year, cb) {
+    try {
+        let sqlInst = `set language brazilian; select convert(char(3), datename(month, createdondate), 0) as months, count(*) as quantity from w1buy_postings where year(createdondate) = ${year} group by convert(char(3), datename(month, createdondate), 0);`;
+
+        db.querySql(sqlInst, function (data, err) {
+            if (err) {
+                console.log(err.message);
+                cb({
+                    'error': err.message
+                });
+            } else {
+                cb(data.recordsets[0]);
+            }
+        });
+    } catch (ex) {
+        cb({
+            'error': ex.message
+        });
+    };
+};
+
+// Gets postings locales statistics
+// vscode-fold=11
+exports.getPostingsLocales = function (req, res, year, cb) {
+    try {
+        let sqlInst = `select (select value from lists where entryid = (select isnull(regionid, 0) from users where userid = p.userid)) as region, count(*) as quantity from w1buy_postings p join users u on p.userid = u.userid where year(p.createdondate) = ${year} group by regionid, p.userid;`;
+
+        db.querySql(sqlInst, function (data, err) {
+            if (err) {
+                console.log(err.message);
+                cb({
+                    'error': err.message
+                });
+            } else {
+                cb(data.recordsets[0]);
+            }
+        });
+    } catch (ex) {
+        cb({
+            'error': ex.message
+        });
+    };
 };

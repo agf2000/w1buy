@@ -7,3 +7,8 @@
 .k-header>.k-link:hover {
     background: none !important;
 }
+
+.k-detail-row:hover {
+    background: none !important;
+    color: #4c5356 !important;
+}

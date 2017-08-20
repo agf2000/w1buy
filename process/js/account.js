@@ -103,8 +103,36 @@ $(function () {
     $('a[href="' + window.location.pathname + '"]').addClass('active');
 
     if (window.location.pathname !== '/contas/minhaconta') {
-        $('a[href="/anuncios"]').removeClass('hidden');
-        $('a[href="/anuncios/novo"]').removeClass('hidden');
+        if (my.userInfo.Roles != undefined) {
+            var match = my.userInfo.Roles.find(function (item) {
+                let result = false;
+                if (item.rolename == 'Administrators') {
+                    result = true;
+                };
+                return result;
+            });
+
+            if (match) {
+                window.location.href = '/admin';
+            } else {
+                $('a[href="/anuncios"]').removeClass('hidden');
+                $('a[href="/anuncios/novo"]').removeClass('hidden');
+            }
+        }
+    } else {
+        if (my.userInfo.Roles != undefined) {
+            var match = my.userInfo.Roles.find(function (item) {
+                let result = false;
+                if (item.rolename == 'Administrators') {
+                    result = true;
+                };
+                return result;
+            });
+
+            if (match) {
+                window.location.href = '/admin';
+            }
+        }
     }
 
     my.sendNotification = function (image, title, message, timeout, showOnFocus) {

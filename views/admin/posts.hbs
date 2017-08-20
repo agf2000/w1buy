@@ -5,7 +5,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-12">
-                    <h3>Dados Cadastrados</h3>
+                    <h3>Anúncios Cadastrados</h3>
                     <div id="dataGrid"></div>
                     <br />
                     <a onclick="javascript: window.location.href='/report/posts'; return false;" target="_blank" id="btnGetPosts" class="btn btn-primary pul-right">Processar</a>
@@ -13,15 +13,11 @@
                 <script type="text/x-kendo-template" id="tmplPost">
                     <div class="col-xs-12">
                         <div class="gallery col-xs-2">
-                            # if (Files) { #
-                                # var files = JSON.parse(Files.replace(/\,(?!\s*[\{\[\"\'\w])/g, '')); #
-                                # for (var i = 0; i < files.length; i++) { #
-                                    <img src="#= '../uploads/' + UserId + '/posts/' + PostingId + '/thumbnail/' + files[i].FileName.replace(/(\.[\w\d_-]+)$/i, '_thumb$1') #" />
-                                # } #
-                            # } #
-                            # if (!Files) { #
-                                <img src="/images/no-image.png" />
-                            # } #
+                            # if (Files) { # # var files = JSON.parse(Files.replace(/\,(?!\s*[\{\[\"\'\w])/g, '')); # # for (var i = 0; i
+                            <
+                                files.length; i++) { # <img src="#= '../uploads/' + UserId + '/posts/' + PostingId + '/thumbnail/' + files[i].FileName.replace(/(\.[\w\d_-]+)$/i, '_thumb$1') #"
+                            /> # } # # } # # if (!Files) { #
+                            <img src="/images/no-image.png" /> # } #
                         </div>
                         <div class="content col-xs-9">
                             <p>#= PostingDescription #
@@ -35,9 +31,9 @@
                             <!-- /Priorities -->
                             # var locales = JSON.parse(Locales.replace(/\,(?!\s*[\{\[\"\'\w])/g, '')); #
                             <dl>
-                                # for (var i = 0; i < locales.length; i++) { #
-                                <dt>#= locales[i].City + ' Qde: ' + Math.max(0, locales[i].Quantity) # &nbsp;</dt>
-                                # } #
+                                # for (var i = 0; i
+                                < locales.length; i++) { # <dt>#= locales[i].City + ' Qde: ' + Math.max(0, locales[i].Quantity) # &nbsp;</dt>
+                                    # } #
                             </dl>
                         </div>
                     </div>

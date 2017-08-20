@@ -119,6 +119,9 @@
 											<a href="/anuncios" class="btn btn-default hidden">Encontar quem deseja</a>
 											<a href="/contas/meusanuncios" class="btn btn-default">Meus Anúncios</a>
 											<a href="/contas/mensagens" class="btn btn-default margin-bottom10-xs">Mensagens</a>
+											<a href="/admin" class="btn btn-default hidden">Admin</a>
+											<a href="/admin/anuncios" class="btn btn-default hidden">Anúncios</a>
+											<a href="/admin/usuarios" class="btn btn-default hidden">Usuários</a>
 										</div>
 									</div>
 								</div>
@@ -210,10 +213,10 @@
 	<!--moment -->
 	<script type="text/javascript" src="/lib/moment/moment.min.js"></script>
 	<script type="text/javascript" src="/lib/moment/locale/pt-br.js"></script>
-	{{!-- <script src="/lib/moment/timezone/moment-timezone.min.js"></script>
-	<script src="/lib/moment/timezone/moment-timezone-with-data.min.js"></script>
-	<script src="/lib/moment/timezone/moment-timezone-with-data-2012-2022.min.js"></script> --}}
 	{{!--
+	<script src="/lib/moment/timezone/moment-timezone.min.js"></script>
+	<script src="/lib/moment/timezone/moment-timezone-with-data.min.js"></script>
+	<script src="/lib/moment/timezone/moment-timezone-with-data-2012-2022.min.js"></script> --}} {{!--
 	<script type="text/javascript" src="/lib/slick-carousel/slick/js/slick.min.js"></script> --}}
 	<script type="text/javascript" src="/lib/slider-pro/js/jquery.sliderPro.min.js"></script>
 	{{!--
@@ -230,14 +233,14 @@
 	<script src="/socket.io/socket.io.js"></script>
 
 	<script type="text/javascript">
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-74617611-1', 'auto');
-        ga('send', 'pageview');
+		(function (i, s, o, g, r, a, m) {
+			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+				(i[r].q = i[r].q || []).push(arguments)
+			}, i[r].l = 1 * new Date(); a = s.createElement(o),
+				m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+		})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+		ga('create', 'UA-74617611-1', 'auto');
+		ga('send', 'pageview');
 	</script>
 
 	{{#each script}}
