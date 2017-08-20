@@ -495,7 +495,7 @@ exports.getPostingsDate = function (req, res, year, cb) {
 // vscode-fold=11
 exports.getPostingsLocales = function (req, res, year, cb) {
     try {
-        let sqlInst = `select (select value from lists where entryid = (select isnull(regionid, 0) from users where userid = p.userid)) as region, count(*) as quantity from w1buy_postings p join users u on p.userid = u.userid where year(p.createdondate) = ${year} group by regionid, p.userid;`;
+        let sqlInst = `select l.value as region, count(*) as quantity from w1buy_postings p join users u on p.userid = u.userid join lists l on isnull(u.regionid, 1111) = l.entryid where year(p.createdondate) = ${year} group by regionid, p.userid, l.value;`;
 
         db.querySql(sqlInst, function (data, err) {
             if (err) {
