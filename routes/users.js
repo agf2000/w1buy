@@ -165,7 +165,7 @@ router.get('/meurelatorio', ensureAuthenticated, function (req, res) {
 			'/lib/pnotify/js/pnotify.callbacks.js',
 			'/lib/pnotify/js/pnotify.confirm.js',
 			'/lib/pnotify/js/pnotify.mobile.js',
-			'/javascripts/kendo/2017.1.223/kendo.all.min.js',
+			'/javascripts/kendo/2017.1.223/kendo.web.min.js',
 			'/javascripts/kendo/2017.1.223/cultures/kendo.culture.pt-BR.min.js',
 			'/javascripts/kendo/2017.1.223/messages/kendo.messages.pt-BR.min.js',
 			'/lib/bootstrap-tagsinput/js/bootstrap-tagsinput.min.js',

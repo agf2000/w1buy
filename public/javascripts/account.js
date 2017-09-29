@@ -5,19 +5,19 @@ $(function () {
     // vscode-fold=1
     my.userInfo = JSON.parse(userInfo);
 
-    // // Socket.io for messages count indicator    
-    // let client = io.connect('https://' + window.location.host, {
-    //     path: "/socket.io"
-    // });
-    // if (my.userInfo) {
-    //     client.emit('messages', my.userInfo.UserID, function (data) {
-    //         console.log(data);
-    //     });
-    // }
-    // client.on('usernames', function (data) {
-    //     $('.newMsgCount').text(parseInt($('.newMsgCount').eq(0).text()) + data);
-    //     my.sendNotification(window.location.protocol + '//' + window.location.host + '/images/logo_small.png', 'W1Buy.com.br', 'Nova mensagem recebida!', 6000, !my.hasFocus);
-    // });
+    // Socket.io for messages count indicator    
+    let client = io.connect('https://' + window.location.host, {
+        path: "/socket.io"
+    });
+    if (my.userInfo) {
+        client.emit('messages', my.userInfo.UserID, function (data) {
+            console.log(data);
+        });
+    }
+    client.on('usernames', function (data) {
+        $('.newMsgCount').text(parseInt($('.newMsgCount').eq(0).text()) + data);
+        my.sendNotification(window.location.protocol + '//' + window.location.host + '/images/logo_small.png', 'W1Buy.com.br', 'Nova mensagem recebida!', 6000, !my.hasFocus);
+    });
 
     // Load user's account information
     // vscode-fold=2
