@@ -5,19 +5,19 @@ $(function () {
     // vscode-fold=1
     my.userInfo = JSON.parse(userInfo);
 
-    // Socket.io for messages count indicator    
-    let client = io.connect('https://' + window.location.host, {
-        path: "/socket.io"
-    });
-    if (my.userInfo) {
-        client.emit('messages', my.userInfo.UserID, function (data) {
-            console.log(data);
-        });
-    }
-    client.on('usernames', function (data) {
-        $('.newMsgCount').text(parseInt($('.newMsgCount').eq(0).text()) + data);
-        my.sendNotification(window.location.protocol + '//' + window.location.host + '/images/logo_small.png', 'W1Buy.com.br', 'Nova mensagem recebida!', 6000, !my.hasFocus);
-    });
+    // // Socket.io for messages count indicator    
+    // let client = io.connect('https://' + window.location.host, {
+    //     path: "/socket.io"
+    // });
+    // if (my.userInfo) {
+    //     client.emit('messages', my.userInfo.UserID, function (data) {
+    //         console.log(data);
+    //     });
+    // }
+    // client.on('usernames', function (data) {
+    //     $('.newMsgCount').text(parseInt($('.newMsgCount').eq(0).text()) + data);
+    //     my.sendNotification(window.location.protocol + '//' + window.location.host + '/images/logo_small.png', 'W1Buy.com.br', 'Nova mensagem recebida!', 6000, !my.hasFocus);
+    // });
 
     // Load user's account information
     // vscode-fold=2
@@ -27,28 +27,28 @@ $(function () {
                 if (account.AccountType == "seller") {
                     switch (account.AccountLevel) {
                         case 1:
-                            $('#iStars i').eq(0).tooltip('hide').attr({
+                            $('.iStars i').eq(0).tooltip('hide').attr({
                                 'data-original-title': 'Esta conta tem um plano Bronze Vendedor. Clique aqui para configurar seu relatório.',
                                 'onclick': 'window.location = "/meuRelatorio"',
                                 'class': 'glyphicon glyphicon-star accountStar bronze'
                             });
                             break;
                         case 2:
-                            $('#iStars i').eq(0).tooltip('hide').attr({
+                            $('.iStars i').eq(0).tooltip('hide').attr({
                                 'data-original-title': 'Esta conta tem um plano Prata Vendedor. Clique aqui para configurar seu relatório.',
                                 'onclick': 'window.location = "/meuRelatorio"',
                                 'class': 'glyphicon glyphicon-star accountStar silver'
                             });
                             break;
                         case 3:
-                            $('#iStars i').eq(0).tooltip('hide').attr({
+                            $('.iStars i').eq(0).tooltip('hide').attr({
                                 'data-original-title': 'Esta conta tem um plano Ouro Vendedor. Clique aqui para configurar seu relatório.',
                                 'onclick': 'window.location = "/meuRelatorio"',
                                 'class': 'glyphicon glyphicon-star accountStar gold'
                             });
                             break;
                         default:
-                            $('#iStars i').eq(1).tooltip('hide').attr({
+                            $('.iStars i').eq(1).tooltip('hide').attr({
                                 'data-original-title': '',
                                 'class': 'fa fa-user'
                             });
@@ -57,25 +57,25 @@ $(function () {
                 } else {
                     switch (account.AccountLevel) {
                         case 1:
-                            $('#iStars i').eq(1).tooltip('hide').attr({
+                            $('.iStars i').eq(1).tooltip('hide').attr({
                                 'data-original-title': 'Esta conta tem um plano Bronze Comprador',
                                 'class': 'glyphicon glyphicon-star accountStar bronze'
                             });
                             break;
                         case 2:
-                            $('#iStars i').eq(1).tooltip('hide').attr({
+                            $('.iStars i').eq(1).tooltip('hide').attr({
                                 'data-original-title': 'Esta conta tem um plano Prata Comprador',
                                 'class': 'glyphicon glyphicon-star accountStar silver'
                             });
                             break;
                         case 3:
-                            $('#iStars i').eq(1).tooltip('hide').attr({
+                            $('.iStars i').eq(1).tooltip('hide').attr({
                                 'data-original-title': 'Esta conta tem um plano Ouro Comprador',
                                 'class': 'glyphicon glyphicon-star accountStar gold'
                             });
                             break;
                         default:
-                            $('#iStars i').eq(1).tooltip('hide').attr({
+                            $('.iStars i').eq(1).tooltip('hide').attr({
                                 'data-original-title': '',
                                 'class': 'fa fa-user'
                             });
@@ -91,7 +91,7 @@ $(function () {
             });
         }
     } else {
-        $('#iStars i').eq(1).tooltip('hide').attr({
+        $('.iStars i').eq(1).tooltip('hide').attr({
             'data-original-title': '',
             'class': 'fa fa-user'
         });

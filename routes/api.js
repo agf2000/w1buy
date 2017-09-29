@@ -1,5 +1,6 @@
 const express = require("express");
 const multer = require('multer');
+const db = require("../core/db");
 // const uuid = require("uuid");
 const fse = require('fs-extra');
 const path = require('path');
@@ -163,7 +164,7 @@ router.get('/post', function (req, res) {
             res.json(data);
         }
     });
- });
+});
 
 // Get postings locales count by keywords or all
 router.get('/getPostingsLocalesCount', function (req, res) {
@@ -244,6 +245,39 @@ router.delete('/removeMsg', function (req, res) {
 
 router.post('/saveReputation', function (req, res) {
     peopleController.saveReputation(req, res, req.body);
+});
+
+// Seller report plans
+router.get('/getSellerReportPlans', ensureAuthenticated, function (req, res) {
+    peopleController.getSellerReportPlans(req, res, req.query.userId, function (records) {
+        if (!records.error) {
+            res.json(records);
+        }
+    });
+});
+
+// Seller report plan
+router.get('/getSellerReportPlan', ensureAuthenticated, function (req, res) {
+    peopleController.getSellerReportPlan(req, res, req.query.planId, function (records) {
+        if (!records.error) {
+            res.json(records);
+        }
+    });
+});
+
+// Add seller report plan
+router.post('/addSellerReportPlan', ensureAuthenticated, function (req, res) {
+    peopleController.addSellerReportPlan(req, res, req.body);
+});
+
+// Save seller report plan
+router.put('/updateSellerReportPlan', ensureAuthenticated, function (req, res) {
+    peopleController.updateSellerReportPlan(req, res, req.body);
+});
+
+// Remove seller report plan
+router.put('/removeSellerReportPlan', ensureAuthenticated, function (req, res) {
+    peopleController.removeSellerReportPlan(req, res, req.query.planId);
 });
 
 // Posting update

@@ -1248,17 +1248,17 @@ button.close:hover {
 	text-align: center;
 }
 
-#iStars i {
+.iStars i {
 	left: 15px;
 }
 
-#iStars i,
-#iStars i:nth-child(2) {
+.iStars i,
+.iStars i:nth-child(2) {
 	position: absolute;
 	/*top: -1px;*/
 }
 
-#iStars i:nth-child(2) {
+.iStars i:nth-child(2) {
 	left: 35px;
 }
 
@@ -3777,4 +3777,22 @@ a.btn-primary {
 #icon-lost-msg.error,
 #icon-register-msg.error {
 	background-color: #eb575b !important;
+}
+
+.k-grid tbody .k-button,
+.k-ie8 .k-grid tbody button.k-button {
+	min-width: 0 !important;
+}
+
+.k-grid tbody .k-button {
+	min-width: 12px;
+	width: 27px;
+	height: 27px;
+	overflow: hidden;
+}
+
+.k-grid tbody .k-button span.fa-remove {
+	color: #fff !important;
+	display: block;
+	padding-top: 2px !important;
 }

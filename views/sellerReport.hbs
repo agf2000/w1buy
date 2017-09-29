@@ -1,0 +1,126 @@
+<div class="container container-fluid">
+    <div class="row">
+        <div style="padding-top: 15px;"></div>
+        <div class="hidden-xs">
+            {{>account}}
+        </div>
+        <hr>
+        <!-- Simple post content example. -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2>Relatório</h2>
+
+                <div class="tab-pane" id="config" role="tabpanel">
+                    <p>
+                        Caro(a) vendedor(a), por possuir uma conta especial, use as funcionalidades abaixo para adicionar localidades e palavras
+                        chaves que servirão como filtro em seu relatório diário. <span style="font-weight: 600">O envio de relatórios será efetivado após as informações abaixo serem preenchidas</span>.
+                    </p>
+
+                    <div class="row">
+                        <div class="col-xs-12 text-center">
+                            <button class="btn btn-primary" id="btnAddReportPlan" data-toggle="collapse" data-target="#reportPlanForm">
+                                Cadastrar Planos de Relatório &nbsp;<span></span>
+                            </button>
+                            <p>&nbsp;</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="collapse" id="reportPlanForm">
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="form-horizontal">
+                                    <fieldset>
+                                        <legend>Escolha e insira suas localidades</legend>
+
+                                        <div class="form-group col-xs-12">
+                                            <label for="select2States">
+                                                Estados: <span class="glyphicon glyphicon-question-sign"
+                                                                data-content="Primeiramente, escolha o estado, em seguida escolha a cidade."
+                                                                title="Estado"></span>
+                                            </label>
+                                            <select class="form-control" data-content="Favor escolher o estado ou região do seu país de origem." data-placeholder="Escolha o Estado"
+                                                id="select2States" style="width: 100%;" title="Cidade">
+                                                <option></option>
+                                            </select>
+                                        </div>
+
+
+                                        <div class="form-group col-xs-12">
+                                            <label for="select2Cities">
+                                                Cidades: <span class="glyphicon glyphicon-question-sign"
+                                                                title="Cidades"
+                                                                data-content="Após escolher o estado, escolha a cidade e clique em adicionar localidade. Com este filtro, receberá em seu email apenas comunicados sobre anúncios cujos os compradores moram nas localidades que escolher."></span>
+                                            </label>
+                                            <select class="form-control" data-content="Favor escolher a Cidade." data-placeholder="Escolha a Cidade" disabled id="select2Cities"
+                                                style="width: 100%;" title="Cidade">
+                                                <option></option>
+                                            </select>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <button class="btn btn-info" id="btnAddLocale">
+                                                    Inserir Localidades
+                                                    &nbsp;<span></span>
+                                                </button> &nbsp;
+                                                <span class="text-success"></span>
+
+                                                <div style="margin: 15px 0 0 0;">
+                                                    <select id="selectLocales" multiple="multiple" title="Escolha o estado então a cidade"></select>
+                                                </div>
+                                                <p>&nbsp;</p>
+                                            </div>
+                                        </div>
+
+                                    </fieldset>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-lg-6">
+                                <div class="form-horizontal">
+                                    <fieldset>
+                                        <legend>Digite aqui os produtos que deseja vender</legend>
+
+                                        <div class="form-group col-xs-12">
+                                            <label for="txtBoxKeywords">
+                                                Palavras Chaves: <span class="glyphicon glyphicon-question-sign"
+                                                                        title="Auto-Tags"
+                                                                        data-content="Para inserir palavras chaves, digite abaixo o nome do produto que deseja vender e clique em Inserir Palavra. Com este filtro, receberá em seu email apenas comunicados sobre anúncios pertinentes ao(s) produtos que inserir."></span>
+                                            </label>
+                                            <input class="form-control" id="txtBoxKeyword" placeholder="Digite o produto aqui e clique em Inserir Palavras" type="text">
+                                        </div>
+
+
+                                        <div class="clearfix">
+                                        </div>
+                                        <button class="btn btn-info" id="btnAddTags">
+                                            Inserir Palavras &nbsp;<span></span>
+                                        </button>
+
+                                        <div style="margin: 15px 0 15px 0;">
+                                            <input id="txtBoxKeywords" readonly>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <button class="btn pull-right col-lg-pull-1 btn-orange" id="btnSaveReportPlan">
+                                    Salvar Plano
+                                </button>
+                                <button class="btn btn-default hidden" id="btnCancelEditReportPlan">
+                                    Cancelar
+                                    Edição
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div id="reportPlansGrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
