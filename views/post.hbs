@@ -84,10 +84,10 @@
                     </a> {{/unless}}
 
                     <!-- Post owner -->
-                    {{#ifCond data.Owner my.userInfo.UserID}}
+                    {{#if data.Owner}}
                     <a id="lnkEditPost" href="/anuncios/editar/{{data.PostingId}}/{{data.UserId}}" class="btn btn-primary pull-right">
                         <i class="fa fa-edit"></i>&nbsp; Editar Anúncio
-                    </a> {{/ifCond}}
+                    </a> {{/if}}
                 </div>
 
                 <div class="clearfix"></div>

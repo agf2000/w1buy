@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]><html class="ie ie6" lang="en"><![endif]-->
-<!--[if IE 7]><html class="ie ie7" lang="en"><![endif]-->
-<!--[if IE 8]><html class="ie ie8" lang="en"><![endif]-->
-<!--[if IE 9]><html class="ie9" lang="en"><![endif]-->
+<!--[if lt IE 7]><html class="ie ie6" lang="pt-BR"><![endif]-->
+<!--[if IE 7]><html class="ie ie7" lang="pt-BR"><![endif]-->
+<!--[if IE 8]><html class="ie ie8" lang="pt-BR"><![endif]-->
+<!--[if IE 9]><html class="ie9" lang="pt-BR"><![endif]-->
 <!--[if (gte IE 10)|!(IE)]><!-->
-<html lang="en">
+<html lang="pt-BR">
 <!--<![endif]-->
 
 <head>
@@ -21,23 +21,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <!-- Fonts -->
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins:400,300,600,700" />
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,300,600,700" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" type="text/css" href="/lib/pace-js/themes/pace-theme-flash.css" />
-    <link rel="stylesheet" type="text/css" href="/lib/font-awesome/css/font-awesome.min.css" />
-    <link rel="stylesheet" type="text/css" href="/lib/slider-pro/css/slider-pro.min.css" />
-    <link rel="stylesheet" type="text/css" href="/lib/fancybox/css/jquery.fancybox.css" />
-    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css" />
+    <link rel="stylesheet" href="/lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/lib/pace-js/themes/pace-theme-flash.css" />
+    <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
 
     <!-- Custom Colors -->
-    <!--<link rel="stylesheet" type="text/css" href="css/colors/blue/color.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="css/colors/green/color.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="css/colors/pink/color.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="css/colors/purple/color.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="css/colors/yellow/color.css" />-->
+    <!--<link rel="stylesheet" href="css/colors/blue/color.css">-->
+    <!--<link rel="stylesheet" href="css/colors/green/color.css">-->
+    <!--<link rel="stylesheet" href="css/colors/pink/color.css">-->
+    <!--<link rel="stylesheet" href="css/colors/purple/color.css">-->
+    <!--<link rel="stylesheet" href="css/colors/yellow/color.css">-->
 
     <!--[if lt IE 9]>
     	<script src="js/html5.js"></script>
@@ -45,17 +43,17 @@
 	<![endif]-->
 
     <!--[if lt IE 8]>
-    	<link rel="stylesheet" href="css/ie-older.css" />
+    	<link rel="stylesheet" href="css/ie-older.css">
     <![endif]-->
 
     {{#each css}}
     <!-- dynamic css -->
-    <link rel="stylesheet" type="text/css" href="{{this}}" />
+    <link href="{{this}}" rel="stylesheet" />
     <!-- /dynamic css -->
     {{/each}}
 
     <noscript>
-        <link rel="stylesheet" type="text/css" href="/stylesheets/no-js.css" />
+        <link rel="stylesheet" href="/stylesheets/no-js.css" />
     </noscript>
 
     <!-- Favicons -->
@@ -78,61 +76,19 @@
             <div class="container">
 
                 <div class="navbar-brand">
-                    <img src="/images/logo.png" alt="Logo" />
+                    {{#if user.UserID}}
+                    <a href="/contas/minhaconta">
+                    {{else}}
+                    <a href="/">
+                    {{/if}}
+                        <img src="/images/logo.png" alt="Logo" />
+                    </a>
                 </div>
 
                 <ul class="nav navbar-nav">
-                    <li class="active hidden-xs" style="font-size: 16px; font-style: italic;"><a name="slogan">Conectando Pessoas e Negocios!!</a></li>
-                    {{#if user}}
-                    <li>
-                        <span class="badge badge-important newMsgCount">{{user.NewMessages}}</span>
-                        <a href="/contas/mensagens"><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></a>
+                    <li class="active hidden-xs" style="font-size: 16px; font-style: italic;">
+                        <a name="slogan">Conectando Pessoas e Negocios!!</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							{{user.DisplayName}}
-							<b class="caret"></b>
-						</a>
-                        <span class="iStars">
-							<i data-toggle="tooltip" data-placement="bottom"><img src="/images/spacer.gif" /></i>
-							<i data-toggle="tooltip" data-placement="bottom"><img src="/images/spacer.gif" /></i>
-						</span>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <li>
-                                <div class="navbar-content">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <h4 style="color: #000 !important;">{{user.FirstName}} {{user.LastName}}</h4>
-                                            <p class="text-muted small">
-                                                {{user.Email}}</p>
-                                            <div class="divider">
-                                            </div>
-                                            <a href="/contas/cadastro" class="btn btn-default">Meu Cadastro</a>
-                                            <a href="/anuncios/novo" class="btn btn-default hidden">Anunciar o que desejo</a>
-                                            <a href="/anuncios" class="btn btn-default hidden">Encontar quem deseja</a>
-                                            <a href="/contas/meusanuncios" class="btn btn-default">Meus Anúncios</a>
-                                            <a href="/contas/mensagens" class="btn btn-default margin-bottom10-xs">Mensagens</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="navbar-footer">
-                                    <div class="navbar-footer-content">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <a class="btn btn-default btn-sm" data-toggle="modal" data-target="#passwordChangeModal">
-                                                    <i class="fa fa-unlock-alt" aria-hidden="true"></i> Alterar Senha
-                                                </a>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <a href="/contas/logout" class="btn btn-default btn-sm pull-right"><i class="fa fa-power-off" aria-hidden="true"></i> Sair</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    {{/if}}
                 </ul>
 
             </div>
@@ -164,12 +120,52 @@
     <!-- #footer -->
     <footer id="footer">
 
-        {{>footer}}
+        <!-- .container -->
+        <div class="container padding-bottom20">
+
+            <!-- .row -->
+            <div class="row">
+
+                <div class="col-sx-12 col-sm-4 widget text-center">
+                    <!-- 1 -->
+                    <img src="/images/logo.png" alt="Logo" class="footer-logo" />
+                    <div class="footer-socials">
+                        <a href="https://www.facebook.com/www.w1buy.com.br" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a>
+                        <a href="https://plus.google.com/110289445330350054280" title="google plus" target="_blank"><i class="fa fa-google-plus"></i></a>
+                        <a href="https://youtu.be/GF9B4zTbWfY" title="you tube" target="_blank"><i class="fa fa-youtube-play"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-sx-12 col-sm-4 widget text-center">
+                    <!-- 2 -->
+                    <div class="row">
+                        <ul>
+                            <li><a href="/privacidade" target="_blank">Politica de Privacidade</a></li>
+                            <li><a href="/termos" target="_blank">Termos de Uso</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-sx-12 col-sm-4 widget text-center">
+                    <!-- 3 -->
+                    <a href="#">www.w1buy.com.br</a><br /><a href="#">w1buy@w1buy.com.br</a>
+                </div>
+
+            </div>
+            <!-- .row end -->
+
+        </div>
+        <!-- .container end -->
+
+        <div class="footer-copyright">
+            <div class="container">
+                <p>&copy; 2016-2017 por <a href="http://w1buy.com.br.com" target="_blank">W1Buy</a> - Todos direitos reservados.
+                </p>
+            </div>
+        </div>
 
     </footer>
     <!-- #footer end -->
-
-    {{>passwordChange}}
 
     <a href="#" class="scrollup" title="Back to Top!">Scroll</a>
     <!-- Back to Top -->
@@ -193,28 +189,6 @@
     <script type="text/javascript" src="/lib/jquery.easing/js/jquery.easing.min.js"></script>
     <script type="text/javascript" src="/lib/smoothscroll/js/smoothscroll.min.js"></script>
     <script type="text/javascript" src="/lib/response.js/js/response.min.js"></script>
-    <script type="text/javascript" src="/lib/jquery-placeholder/js/jquery.placeholder.js"></script>
-    <script type="text/javascript" src="/lib/fitvids/js/fitvids.min.js"></script>
-    <script type="text/javascript" src="/javascripts/jquery.imgpreload.min.js"></script>
-    <script type="text/javascript" src="/lib/jquery-waypoints/js/waypoints.min.js"></script>
-    <script type="text/javascript" src="/lib/slider-pro/js/jquery.sliderPro.min.js"></script>
-    <script type="text/javascript" src="/lib/fancybox/js/jquery.fancybox.pack.js"></script>
-    <script type="text/javascript" src="/lib/fancybox/helpers/js/jquery.fancybox-media.js"></script>
-    <script type="text/javascript" src="/lib/isotope-layout/js/isotope.pkgd.min.js"></script>
-    <script type="text/javascript" src="/javascripts/script.js"></script>
-    <!-- Socket.IO -->
-    <script src="/socket.io/socket.io.js"></script>
-
-    <script type="text/javascript">
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-74617611-1', 'auto');
-        ga('send', 'pageview');
-    </script>
 
     {{#each script}}
     <!-- dynamic scripts -->

@@ -27,7 +27,7 @@ my.viewModel = function () {
         if (data.Files) {
             self.files = JSON.parse(data.Files.replace(/\,(?!\s*[\{\[\"\'\w])/g, ''));
             ko.utils.arrayForEach(self.files, function (item) {
-                item.FileName = item.FileName.replace(/(\.[\w\d_-]+)$/i, '_thumb$1');
+                item.FileName = item.FileName.replace(/(\.[\w\d_-]+)$/i, '_thumb$1');;
             });
         } else {
             self.files = null;

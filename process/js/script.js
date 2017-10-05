@@ -44,7 +44,7 @@
 		// Add mobile navigation
 		MobileMenu: function () {
 			var navMenu = '<nav id="navigation_mobile">';
-			navMenu += '<div class="navbar-brand"><a href="/"><img src="/images/logo.png" alt="Logo" /></a></div>';
+			navMenu += '<div class="navbar-brand"><a href="index.html"><img src="/images/logo.png" alt="Logo" /></a></div>';
 			navMenu += '<div class="active pull-left slogan" style="font-size: 16px; font-style: italic; margin-top: 30px;"><a name="slogan">Conectando Pessoas e Negocios!!</a></div>';
 			navMenu += '<div class="nav-menu-links">';
 			navMenu += '<ul>';
