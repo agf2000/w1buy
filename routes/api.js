@@ -1,18 +1,18 @@
-const express = require("express");
+const express = require('express');
 const multer = require('multer');
 // const uuid = require("uuid");
 const fse = require('fs-extra');
 const path = require('path');
 const shortid = require('shortid');
-const peopleController = require("../controllers/peopleController.js");
-const postingController = require("../controllers/postingController.js");
-const messageController = require("../controllers/messageController.js");
+const peopleController = require('../controllers/peopleController');
+const postingController = require('../controllers/postingController');
+const messageController = require('../controllers/messageController');
+const psController = require('../controllers/psController');
 const ensureAuthenticated = require('../process/js/ensureAuthenticated');
-// const fs = require('fs');
 const thumb = require('node-thumbnail').thumb;
-// const fileMover = require('../public/javascripts/fileMover');
-// const notifier = require('node-notifier');
-// const growl = require('growl');
+// const PagSeguro = require('pagseguro-nodejs');
+const PagSeguro = require('pagseguro');
+const camaro = require('camaro');
 
 const router = express.Router();
 
@@ -221,6 +221,183 @@ router.delete('/removeMsg', function (req, res) {
 
 router.post('/saveReputation', function (req, res) {
     peopleController.saveReputation(req, res, req.body);
+});
+
+router.get('/notify', function (req, res, next) {
+    console.log(`params: ${req.params.transaction_id}, body: ${req.body.transaction_id}, query: ${req.query.transaction_id}`);
+    res.json('ok');
+});
+
+router.get('/buyPlan', function (req, res, next) {
+    let result;
+
+    /* pagSeguro Account */
+    let pagSeguro = new PagSeguro({
+        mode: 'sandbox',
+        email: 'agf_2000@hotmail.com',
+        token: '110A09A541644C75A950B8369820361B'
+    });
+
+    /* pagSeguro Settings */
+    pagSeguro.currency('BRL');
+    pagSeguro.reference('W1BUY');
+
+    // pagSeguro.redirect('http://local.riw.com.br/callback');
+    // pagSeguro.notify('http://local.riw.com.br/notify');
+
+    // pagSeguro.setRedirectURL("http://local.riw.com.br/callback");
+    // pagSeguro.setNotificationURL("http://local.riw.com.br/notify");
+
+    /* Products */
+    pagSeguro.addItem({
+        id: req.query.id,
+        description: req.query.desc,
+        amount: req.query.amount,
+        quantity: '1'
+    });
+
+    /* Buyer info */
+    pagSeguro.buyer({
+        name: req.query.buyerName,
+        email: 'w1buy@sandbox.pagSeguro.com.br', // req.query.buyerEmail,
+        // phone: {
+        //     areaCode: req.query.buyerAreacode, // '51',
+        //     number: req.query.buyerPhone // '12345678'
+        // }
+        phoneAreaCode: req.query.buyerAreacode,
+        phoneNumber: req.query.buyerPhone
+    });
+
+    /* Shipping info */
+    pagSeguro.shipping({
+        type: 1,
+        name: req.query.buyerName,
+        email: 'w1buy@sandbox.pagSeguro.com.br', // req.query.buyerEmail,
+        street: req.query.buyerStreet,
+        number: req.query.buyerStreetNumber,
+        complement: '',
+        district: req.query.buyerAddressDistrict,
+        postalCode: req.query.buyerAddressPostalCode,
+        city: req.query.buyerCity,
+        state: req.query.buyerRegion,
+        country: 'BRA'
+        // address: {
+        //     street: req.query.buyerAddress, // 'Endereço',
+        //     number: req.query.buyerUnitNumber,
+        //     city: req.query.buyerCity,
+        //     state: req.query.buyerRegion,
+        //     country: 'BRA'
+        // }
+    });
+
+    /* Checkout result */
+    // pagSeguro.checkout(function (success, response) {
+    //     if (success) {
+    //         console.log('Checkout Success');
+    //         console.log(response);
+
+    //         let url = '';
+    //         if (pagSeguro.mode === 'sandbox') {
+    //             url = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='
+    //         } else {
+    //             url = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='
+    //         }
+
+    //         const template = {
+    //             data: '//code'
+    //         }
+
+    //         res.json({
+    //             "url": url + camaro(response, template).data
+    //         });
+    //     } else {
+    //         console.log('Checkout Error');
+    //         console.error(response);
+
+    //         res.json({
+    //             "error": response
+    //         });
+    //     }
+    // });
+
+    pagSeguro.send(function (err, response) {
+        if (err) {
+            console.log(err);
+        }
+        console.log(response);
+
+        let url = '';
+        if (pagSeguro.mode === 'sandbox') {
+            url = 'https://sandbox.pagseguro.uol.com.br/v2/checkout/payment.html?code='
+        } else {
+            url = 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code='
+        }
+
+        const template = {
+            data: '//code'
+        }
+
+        res.json({
+            "url": url + camaro(response, template).data
+        });
+    });
+
+    next;
+});
+
+router.get('/transactions', function (req, res, next) {
+
+    /* pagSeguro Account */
+    let pagSeguro = new PagSeguro({
+        mode: 'sandbox',
+        email: 'agf_2000@hotmail.com',
+        token: '110A09A541644C75A950B8369820361B'
+    });
+
+    pagSeguro.transaction(req.query.transaction_id, function (success, response) {
+        if (success) {
+            console.log('Success');
+            console.log(response);
+        } else {
+            console.log('Error');
+            console.error(response);
+        }
+    });
+
+    next();
+});
+
+// Seller report plans
+router.get('/getSellerReportPlans', ensureAuthenticated, function (req, res) {
+    peopleController.getSellerReportPlans(req, res, req.query.userId, function (records) {
+        if (!records.error) {
+            res.json(records);
+        }
+    });
+});
+
+// Seller report plan
+router.get('/getSellerReportPlan', ensureAuthenticated, function (req, res) {
+    peopleController.getSellerReportPlan(req, res, req.query.planId, function (records) {
+        if (!records.error) {
+            res.json(records);
+        }
+    });
+});
+
+// Add seller report plan
+router.post('/addSellerReportPlan', ensureAuthenticated, function (req, res) {
+    peopleController.addSellerReportPlan(req, res, req.body);
+});
+
+// Save seller report plan
+router.put('/updateSellerReportPlan', ensureAuthenticated, function (req, res) {
+    peopleController.updateSellerReportPlan(req, res, req.body);
+});
+
+// Remove seller report plan
+router.put('/removeSellerReportPlan', ensureAuthenticated, function (req, res) {
+    peopleController.removeSellerReportPlan(req, res, req.query.planId);
 });
 
 // Posting update

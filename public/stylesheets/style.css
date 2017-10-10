@@ -3778,3 +3778,21 @@ a.btn-primary {
 #icon-register-msg.error {
 	background-color: #eb575b !important;
 }
+
+.k-grid tbody .k-button,
+.k-ie8 .k-grid tbody button.k-button {
+	min-width: 0 !important;
+}
+
+.k-grid tbody .k-button {
+	min-width: 12px;
+	width: 27px;
+	height: 27px;
+	overflow: hidden;
+}
+
+.k-grid tbody .k-button span.fa-remove {
+	color: #fff !important;
+	display: block;
+	padding-top: 2px !important;
+}
